@@ -7,8 +7,10 @@ const userRoutes = require('./routes/user.routes');
 // on importe les routes "post"
 const postRoutes = require('./routes/post.routes');
 
-require('dotenv').config({ path: './config/.env' });
-require('./config/database');
+const dotenv = require("dotenv");
+dotenv.config();
+// require('dotenv').config({ path: './config/.env' });
+// require('./config/database');
 
 // on importe le module "path" pour interagir avec les routes de fichiers "image"
 const path = require("path");
