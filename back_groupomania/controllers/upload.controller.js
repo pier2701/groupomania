@@ -1,0 +1,56 @@
+// on importe notre model "user"
+const User = require("../models/user");
+
+// le module "fs" nous permettra de manipuler des fichiers
+const fs = require("fs");
+
+// module qui va nous permettre d'exploiter le "stream" qui contiendra notre fichier
+const { promisify } = require("util");
+const pipeline = promisify(require("stream").pipeline);
+
+// on importe une fonction qui exploitera les "error" pour le front
+const { uploadErrors } = require("../utils/errors");
+
+exports.uploadProfileImage = (req, res) => {
+    try {
+        if (
+            // on vérifie le "bon" format de l'image
+            req.file.detectedMimeType != "image/jpg" &&
+            req.file.detectedMimeType != "image/png" &&
+            req.file.detectedMimeType != "image/jpeg"
+        )
+            throw Error("invalid file");
+        if (
+            // on limite la taille de l'image
+            req.file.size > 500000
+        )
+            throw Error("max size")
+    } catch (error) {
+        // on récupère les erreurs pour les afficher dans le front
+        const errors = uploadErrors(error);
+        return res.status(401).json({ errors });
+    }
+
+    // on renomme notre image avec le même nom en jpg
+    // en cas de màj la nouvelle image écrasera l'ancienne
+    const fileName = req.body.pseudo + ".jpg";
+
+    // on récupère le fichier qu'on importera dans "../images/profil/"
+    pipeline(
+        req.file.stream,
+        fs.createWriteStream(`${__dirname}/../images/profil/${fileName}`)
+    );
+
+    try {
+        // on met à jour l'image du "user"
+        User.findByIdAndUpdate(
+            req.body.userId,
+            { $set: { picture: "../images/profil/" + fileName } },
+            { new: true, upsert: true, setDefaultsOnInsert: true })
+            .then((data) => res.send(data))
+            .catch((error) => res.status(500).send("erreur dans 'picture' du 'user' : " + error));
+
+    } catch (error) {
+        return res.status(500).send("erreur dans 'picture' du 'user' : " + error);
+    }
+};

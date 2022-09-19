@@ -1,0 +1,5 @@
+/node_modules
+/config/.env
+/images/*.png
+/images/*.jpg
+/images/*.jpeg
