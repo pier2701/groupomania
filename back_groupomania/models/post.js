@@ -9,8 +9,9 @@ const PostSchema = mongoose.Schema(
     {
         userId: { type: String, required: true, },
         message: { type: String, trim: true, maxlength: 400 },
-        imageUrl: { type: String, },
-        likers: { type: [String], required: true, },
+        imageUrl: { type: String },
+        video: { type: String },
+        likers: { type: [String], required: true },
         comments: {
             type: [{
                 commenterId: String,

@@ -11,7 +11,7 @@ const pipeline = promisify(require("stream").pipeline);
 // on importe une fonction qui exploitera les "error" pour le front
 const { uploadErrors } = require("../utils/errors");
 
-exports.uploadProfileImage = (req, res) => {
+exports.uploadProfileImage = async (req, res) => {
     try {
         if (
             // on vérifie le "bon" format de l'image
@@ -43,14 +43,14 @@ exports.uploadProfileImage = (req, res) => {
 
     try {
         // on met à jour l'image du "user"
-        User.findByIdAndUpdate(
+        await User.findByIdAndUpdate(
             req.body.userId,
             { $set: { picture: "../images/profil/" + fileName } },
             { new: true, upsert: true, setDefaultsOnInsert: true })
             .then((data) => res.send(data))
-            .catch((error) => res.status(500).send("erreur dans 'picture' du 'user' : " + error));
+            .catch((err) => res.status(500).send("erreur dans 'picture' du 'user' : " + err));
 
-    } catch (error) {
-        return res.status(500).send("erreur dans 'picture' du 'user' : " + error);
+    } catch (err) {
+        return res.status(500).send("erreur dans 'picture' du 'user' : " + err);
     }
 };

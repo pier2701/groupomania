@@ -1,18 +1,14 @@
 const UserModel = require('../models/user');
-
 // on récupère le module via une variable
 const jwt = require('jsonwebtoken');
 
 // on récupère la gestion des "errors"
 const { signUpErrors, signInErrors } = require('../utils/errors');
 
-const dotenv = require("dotenv");
-dotenv.config();
-
-// durée du "token"
 const maxAge = 3 * 24 * 60 * 60 * 1000;
+require('dotenv').config({ path: './config/.env' });
 
-
+// paramètre du "token"
 const createToken = (id) => {
     return jwt.sign({ id }, process.env.SECRET_KEY, {
         expiresIn: maxAge
@@ -21,17 +17,18 @@ const createToken = (id) => {
 
 // la logique pour s'inscrire
 exports.signUp = async (req, res) => {
-
     const { pseudo, email, password } = req.body;
 
     try {
         const user = await UserModel.create({ pseudo, email, password });
-        res.status(201).json({ user: user._id });
+        res.status(201).send({ user: user._id });
     }
     catch (error) {
+        console.log("le catch error du signup : " + error);
         // on récupère les errors pour les renvoyer au "front"
+
         const errors = signUpErrors(error);
-        res.status(401).send({ errors })
+        res.status(200).send({ errors })
     }
 }
 
@@ -46,9 +43,10 @@ exports.signIn = async (req, res) => {
         res.cookie('jwt', token, { httpOnly: true, maxAge });
         res.status(200).json({ user: user._id })
     } catch (error) {
+        console.log(error);
         // on récupère les errors pour les renvoyer au "front"
         const errors = signInErrors(error);
-        res.status(200).json({ errors });
+        res.status(200).send({ errors });
     }
 }
 

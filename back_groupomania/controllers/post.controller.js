@@ -63,6 +63,7 @@ exports.createPost = async (req, res) => {
         message: req.body.message,
         // le champ sera vide s'il n'y a pas d'image
         imageUrl: req.file !== null ? "./images/post/" + fileName : "",
+        video: req.body.video,
         likers: [],
         comments: [],
     });

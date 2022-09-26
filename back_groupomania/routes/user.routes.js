@@ -5,7 +5,6 @@ const router = express.Router();
 // on utilise le module "multer" pour la gestion des images
 const multer = require("multer");
 const upload = multer();
-const uploadController = require('../controllers/upload.controller');
 
 // on met en place le "token"
 const authController = require('../controllers/auth.controller');
@@ -13,17 +12,13 @@ const authController = require('../controllers/auth.controller');
 // les routes "user"
 const userController = require('../controllers/user.controller');
 
-// on déclare le middleware de contrôle du bon format de l'email
-const regexEmail = require("../middleware/regexEmail");
-
-// on déclare le middleware de contrôle du mot de passe
-const pwdValidate = require("../middleware/password");
+const uploadController = require('../controllers/upload.controller');
 
 // la route qui va gérer les images 
 router.post("/upload", upload.single("file"), uploadController.uploadProfileImage)
 
 // route pour s'inscrire
-router.post("/register", regexEmail, pwdValidate, authController.signUp);
+router.post("/register", authController.signUp);
 
 // route pour se connecter
 router.post("/login", authController.signIn);

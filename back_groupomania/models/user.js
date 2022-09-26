@@ -1,53 +1,49 @@
 // on importe mongoose
 const mongoose = require("mongoose");
 
-// on importe le module qui interprètera les erreurs en http, ainsi que les codes appropriés
-const MongooseErrors = require("mongoose-errors");
-
 // on rajoute un "plug-in" qui est "unique-validator"
 const uniqueValidator = require("mongoose-unique-validator");
 
 // on met en place la fonction qui contrôle le format de l'email
 const { isEmail } = require('validator');
 
-// on récupère la package "crypto-js" pour hâcher le "email"
-//const cryptoJs = require("crypto-js");
+// on met en place la création d'un "password" fort
+const { isValidPassword } = require('mongoose-custom-validators')
 
 // on récupère la package "bcrypt" pour hâcher le password
 const bcrypt = require('bcrypt');
-
-const dotenv = require("dotenv");
-dotenv.config();
-const SECRET_KEY = process.env.SECRET_KEY;
 
 const userSchema = mongoose.Schema(
     {
         pseudo: {
             type: String,
-            required: true,
-            minLength: 3,
-            maxlength: 45,
+            required: [true, 'Veuillez saisir un pseudo'],
             unique: true,
-            trim: true
+            minLength: 4,
+            maxLength: 35,
+            trim: true,
         },
         email: {
             type: String,
-            required: true,
-            validate: [isEmail],
+            required: [true, 'Veuillez saisir un email'],
             unique: true,
             lowercase: true,
-            trim: true
+            trim: true,
+            required: true,
+            validate: [isEmail],
         },
         password: {
             type: String,
+            required: [true, 'Veuillez saisir un password'],
+            max: 1024,
+            minLength: 8,
             required: true,
-            max: 400,
-            minlength: 6
+            validate: [isValidPassword],
         },
 
         picture: {
             type: String,
-            default: "../images/profil/random-user.jpg"
+            default: "./uploads/profil/default-user.jpg"
         },
         bio: {
             type: String,
@@ -77,6 +73,7 @@ userSchema.pre("save", async function (next) {
 
 });
 
+
 // on décrypte le password avec bcrypt pour se "login"  
 userSchema.statics.login = async function (email, password) {
     const user = await this.findOne({ email }); // on prend "email en référence de recherche"
@@ -86,13 +83,12 @@ userSchema.statics.login = async function (email, password) {
         if (auth) {
             return user;
         }
-        throw Error('mot de passe incorrect');
+        // on utilisera le mot "password" pour l'exploiter en front
+        throw Error('password incorrect');
     }
+    // on utilisera le mot "email" pour l'exploiter en front
     throw Error('email incorrect')
 };
-
-// on applique le plug-in au "schema"
-userSchema.plugin(MongooseErrors);
 
 // on applique le plug-in au "schema"
 userSchema.plugin(uniqueValidator);

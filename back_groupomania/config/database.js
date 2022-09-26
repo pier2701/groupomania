@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const dotenv = require("dotenv");
-dotenv.config();
+require('dotenv').config({ path: './config/.env' });
 
 // on déclare la variable d'environnement de connection
 const MONGODB_URI = process.env.MONGODB_URI;

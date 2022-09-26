@@ -1,5 +1,5 @@
 // on exploite les "error" d'inscription, pour les bonnes informations à l'utilisateur
-exports.signUperrors = (error) => {
+exports.signUpErrors = (error) => {
     let errors = { pseudo: "", email: "", password: "" };
 
     if (error.message.includes("pseudo"))
@@ -9,7 +9,7 @@ exports.signUperrors = (error) => {
         errors.email = "Votre email ne respecte pas le bon format.";
 
     if (error.message.includes("password"))
-        errors.password = "Le mot de passe doit contenir minimum 8 caractères, une lettre en majuscule, une lettre en minuscule, au moins 2 chiffres et pas d'espace.";
+        errors.password = "Le mot de passe doit contenir minimum 8 caractères, 1 lettre en majuscule, 1 lettre en minuscule, au moins 1 chiffre, un caractère spécial et pas d'espace";
 
     if (error.code === 11000 && Object.keys(error.keyValue)[0].includes("pseudo"))
         errors.pseudo = "Ce pseudo est malheureusement pris.";
@@ -22,7 +22,7 @@ exports.signUperrors = (error) => {
 
 // on exploite les "error" de connection, pour les bonnes informations à l'utilisateur
 exports.signInErrors = (error) => {
-    let errors = { email: '', password: '' }
+    let errors = { email: "", password: "" };
 
     if (error.message.includes("email"))
         errors.email = "Votre email ne correspond pas.";

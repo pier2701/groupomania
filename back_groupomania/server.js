@@ -7,10 +7,8 @@ const userRoutes = require('./routes/user.routes');
 // on importe les routes "post"
 const postRoutes = require('./routes/post.routes');
 
-const dotenv = require("dotenv");
-dotenv.config();
-// require('dotenv').config({ path: './config/.env' });
-// require('./config/database');
+require('dotenv').config({ path: './config/.env' });
+require('./config/database');
 
 // on importe le module "path" pour interagir avec les routes de fichiers "image"
 const path = require("path");
@@ -83,7 +81,7 @@ app.get('*', checkUser);
 
 // route "front" pour vérifier le "user"
 app.get('/jwtid', requireAuth, (req, res) => {
-    res.status(200).send("l'iD du 'user' : " + res.locals.user._id)
+    res.status(200).send(res.locals.user._id)
 });
 
 // nos routes "user"
