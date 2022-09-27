@@ -1,5 +1,8 @@
-/node_modules
+/node_modules/
 /config/.env
-/images/*.png
-/images/*.jpg
-/images/*.jpeg
+/images/post/*.png
+/images/post/*.jpg
+/images/post/*.jpeg
+/images/profil/*.png
+/images/profil/*.jpg
+/images/profil/*.jpeg
