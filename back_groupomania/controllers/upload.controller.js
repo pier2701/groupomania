@@ -33,11 +33,11 @@ exports.uploadProfileImage = async (req, res) => {
 
     // on renomme notre image avec le même nom en jpg
     // en cas de màj la nouvelle image écrasera l'ancienne
-    const fileName = req.body.pseudo + ".jpg";
+    const fileName = req.body.name + ".jpg";
 
     // on récupère le fichier qu'on importera dans "../images/profil/"
     pipeline(
-        req.file.stream,
+        req.file.stream, // le fichier est sauvegardé dans "images"
         fs.createWriteStream(`${__dirname}/../images/profil/${fileName}`)
     );
 
@@ -45,7 +45,7 @@ exports.uploadProfileImage = async (req, res) => {
         // on met à jour l'image du "user"
         await User.findByIdAndUpdate(
             req.body.userId,
-            { $set: { picture: "../images/profil/" + fileName } },
+            { $set: { picture: "./images/profil/" + fileName } }, // le nom du nouveau fichier à jour
             { new: true, upsert: true, setDefaultsOnInsert: true })
             .then((data) => res.send(data))
             .catch((err) => res.status(500).send("erreur dans 'picture' du 'user' : " + err));

@@ -49,7 +49,6 @@ const options = {
 }
 
 app.use(cors(options));
-
 // middleware qui intercepte les requêtes utilisateur POUR LES RENDRE EXPLOITABLE sous format "json"
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
