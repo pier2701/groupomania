@@ -19,7 +19,6 @@ $shadow: rgb(219, 218, 218);
     .icons-bis {
       position: absolute;
       left: 10px;
-
       a {
         transition: 0.1s;
         display: inline-block;
@@ -35,6 +34,7 @@ $shadow: rgb(219, 218, 218);
           position: absolute;
           background: $color-4;
           border-radius: 50px;
+          border: #ff7b77 solid 1px;
         }
 
         &:hover {
@@ -43,7 +43,7 @@ $shadow: rgb(219, 218, 218);
         &:hover::before {
           transform: scale(1);
           @media screen and (max-width: 590px) {
-            background: $color-1;
+            background: $color-2;
             height: 34px;
             width: 34px;
           }
@@ -65,12 +65,14 @@ $shadow: rgb(219, 218, 218);
           height: 40px;
           width: 5px;
           position: absolute;
-          background: #fd2d01;
-          left: -7px;
-          bottom: 8px;
+          background: #ffd7d7;
+          border: #ff7b77 solid 1px;
+          left: -8px;
+          bottom: 6px;
           border-radius: 40px;
+
           transform: scaleY(0);
-          animation: scale 0.3s ease forwards;
+          animation: scale 0.4s ease forwards;
 
           @keyframes scale {
             to {

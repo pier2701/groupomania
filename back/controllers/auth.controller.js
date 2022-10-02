@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 // on récupère la gestion des "errors"
 const { signUpErrors, signInErrors } = require('../utils/errors');
 
-const maxAge = 3 * 24 * 60 * 60 * 1000;
+const maxAge = 3 * 60 * 60 * 1000; // expire au bout de 3h.
 require('dotenv').config({ path: './config/.env' });
 
 // paramètre du "token"

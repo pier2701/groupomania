@@ -8,7 +8,7 @@ const Navbar = () => {
     // on vérifie si le "user" à les autorisations
     const uid = useContext(UidContext);
 
-    // on met à dispodition les "datas" du userReducer
+    // on met à dispodition les "datas" du userReducer pour les afficher
     const userData = useSelector((state) => state.userReducer);
 
     return (
@@ -25,7 +25,7 @@ const Navbar = () => {
                         <li className='welcome'>
                             <NavLink to="/profil">
                                 {/* on passe la "data" */}
-                                <h5>{userData.pseudo} ✅ </h5>
+                                <h5>{userData.pseudo} 👤</h5>
                             </NavLink>
                         </li>
                         <Logout />

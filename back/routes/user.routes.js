@@ -39,7 +39,7 @@ router.put("/:id", userController.updateUser);
 router.delete("/:id", userController.deleteUser);
 
 // route pour mettre à jour un [follow] du "user"
-router.post('/follow/:id', userController.follow);
-router.post("/unfollow/:id", userController.unfollow);
+router.patch('/follow/:id', userController.follow);
+router.patch("/unfollow/:id", userController.unfollow);
 
 module.exports = router;

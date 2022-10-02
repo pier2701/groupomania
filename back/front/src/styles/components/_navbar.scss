@@ -89,11 +89,11 @@ nav {
 
 .icon_log:hover {
   background-color: #ff7b77;
-  width: 35px;
   transform-origin: center;
-  transform: scale(1.02);
-  transition: 0.3s;
+  transform: scale(1.5);
+  transition: 0.2s;
   padding: 5px;
   margin: auto;
+  border: 1px solid #4e5166;
   border-radius: 50px;
 }

@@ -9,6 +9,7 @@ import rootReducer from "./reducers";
 import { applyMiddleware } from "redux";
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from "redux-devtools-extension";
+import { getUsers } from './actions/users.actions';
 
 const middleware = [thunkMiddleware];
 const middlewareEnhancer = applyMiddleware(...middleware)
@@ -18,6 +19,9 @@ const store = configureStore({
   composeWithDevTools,
   middlewareEnhancer,
 });
+
+// on met à disposition les "user"
+store.dispatch(getUsers())
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
