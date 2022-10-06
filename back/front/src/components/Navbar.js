@@ -14,6 +14,7 @@ const Navbar = () => {
     return (
         <nav>
             <div className="nav-container">
+
                 <div className="logo">
                     <NavLink to="/">
                         <img src="./img/logo-black.svg" alt="logo du site" />

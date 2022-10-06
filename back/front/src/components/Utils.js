@@ -15,9 +15,10 @@ export const dateParser = (num) => {
     // on applique les paramètres de la date
     let date = new Date(timestamp).toLocaleDateString("fr-FR", options);
 
-    return date.toString(); // on récupère les "data" en carctères
+    return date.toString(); // on récupère les "data" en carctères exploitables pour le "user"
 };
 
+// on met en place la logique pour traiter les "data" du "timestamp"
 export const timestampParser = (num) => {
     let options = {
         hour: "2-digit",

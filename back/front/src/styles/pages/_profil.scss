@@ -234,7 +234,7 @@ $shadow: rgb(219, 218, 218);
           transition: 00.2s forwards;
           transform: translate(-50%, -50%);
           width: 270px;
-          background: $color-3;
+          background: $color-1;
           color: $color-2;
           border-radius: 50px;
           box-shadow: 15px 11px 6px rgba(51, 51, 51, 0.363);
@@ -243,10 +243,11 @@ $shadow: rgb(219, 218, 218);
           z-index: 10;
           cursor: pointer;
           &:hover {
-            font-weight: 900;
-            color: whitesmoke;
             transition: 0.5s;
-            letter-spacing: 0.5px;
+            color: whitesmoke;
+            border-left: none;
+            border-right: none;
+            background: darken($color: #4e5166, $amount: 15);
           }
         }
         input[type="file"] {
@@ -261,6 +262,7 @@ $shadow: rgb(219, 218, 218);
           }
         }
         input[type="submit"] {
+          font-weight: bold;
           border: #fd2d01 1px solid;
           margin-top: 10px;
           border-radius: 50px;
@@ -268,7 +270,7 @@ $shadow: rgb(219, 218, 218);
 
           &:hover {
             font-weight: bold;
-            color: whitesmoke;
+            color: $color-1;
             transition: 0.5s;
             letter-spacing: 1px;
           }
@@ -304,6 +306,7 @@ $shadow: rgb(219, 218, 218);
         box-shadow: 15px 11px 6px rgba(51, 51, 51, 0.363);
       }
       button {
+        width: 55%;
         font-weight: bold;
         border: #fd2d01 1px solid;
         margin: 3px 0;
@@ -311,7 +314,7 @@ $shadow: rgb(219, 218, 218);
         box-shadow: 15px 11px 6px rgba(51, 51, 51, 0.363);
         &:hover {
           font-weight: bold;
-          color: whitesmoke;
+          color: $color-1;
           transition: 0.5s;
         }
       }
@@ -319,7 +322,7 @@ $shadow: rgb(219, 218, 218);
         margin: 60px 0 10px;
       }
       h5 {
-        background: $color-3;
+        background: $color-1;
         color: $color-2;
         margin: 20px 0;
         padding: 12px;
@@ -331,15 +334,17 @@ $shadow: rgb(219, 218, 218);
         cursor: pointer;
 
         &:hover {
-          transition: 0.7s;
-          filter: brightness(350%);
-          box-shadow: 15px 11px 6px rgba(51, 51, 51, 0.363);
+          color: whitesmoke;
+          border-left: none;
+          border-right: none;
+          background: darken($color: #4e5166, $amount: 15);
+          transition: 0.5s;
         }
       }
     }
   }
   .popup-profil-container {
-    color: #4e5166;
+    color: $color-1;
     z-index: 100;
     width: 100%;
     top: 0;
@@ -450,6 +455,7 @@ $shadow: rgb(219, 218, 218);
             text-align: left;
 
             button {
+              width: 100px;
               font-weight: 900;
               border: #fd2d01 solid;
               color: #ffd7d7;

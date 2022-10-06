@@ -34,9 +34,9 @@ router.patch('/like/:id', postCtrl.likePost);
 router.patch('/unlike/:id', postCtrl.unlikePost);
 
 // les routes de type PATCH pour commenter des "post"
-router.patch('/comment_post/:id', postCtrl.commentPost);
-router.patch('/edit_comment_post/:id', postCtrl.editCommentPost);
-router.patch('/delete_comment_post/:id', postCtrl.deleteCommentPost);
+router.patch('/comment-post/:id', postCtrl.commentPost);
+router.patch('/edit-comment-post/:id', postCtrl.editCommentPost);
+router.patch('/delete-comment-post/:id', postCtrl.deleteCommentPost);
 
 // on exporte la méthode "router"
 module.exports = router;

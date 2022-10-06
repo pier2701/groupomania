@@ -1,5 +1,5 @@
-$color-1: #ff7b77;
-$color-2: #ffd0c4;
+$color-1: #fd2d01;
+$color-2: #ffd7d7;
 $color-3: whitesmoke;
 $color-4: #fdeeee;
 $black: rgb(40, 40, 40);
@@ -37,19 +37,21 @@ textarea {
 }
 button,
 input[type="submit"] {
+  width: 50%;
   background: $color-2;
   color: $color-1;
   cursor: pointer;
   transition: 0.2s;
   margin: 0;
-  padding: 10px 20px;
+  padding: 7px 10px;
   cursor: pointer;
   font-size: 1.1rem;
-  border-radius: 5px 5px 20px 20px;
+  border-radius: 0px 0px 20px 20px;
 
   &:hover {
-    background: $color-1;
-    color: $color-2;
+    letter-spacing: 0.5px;
+    border-left: $color-1 solid 5.5px;
+    border-right: $color-1 solid 5.5px;
   }
 }
 input[type="checkbox"] {
@@ -75,8 +77,8 @@ body {
 }
 
 .error {
-  color: red;
-  font-weight: bold;
+  color: $color-2;
+  font-weight: 900;
 }
 .success {
   color: green;

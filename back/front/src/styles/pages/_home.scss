@@ -1,8 +1,8 @@
-$color-1: #ff7b77;
+$color-1: #ffd7d7;
 $color-2: #ffd0c4;
 $color-3: rgb(0, 22, 44);
-$color-4: #fdeeee;
-$black: rgb(40, 40, 40);
+$color-4: #fdeeeea9;
+$black: #4e5166;
 $white: rgb(253, 253, 253);
 $shadow: rgb(219, 218, 218);
 .home {
@@ -29,8 +29,9 @@ $shadow: rgb(219, 218, 218);
       text-align: center;
 
       .connection-form {
-        background: $color-4;
-        border-radius: 20px;
+        background: #5e627d;
+        border-radius: 10px 10px 30px 30px;
+        border: #ffd7d7 1px solid;
         padding: 20px;
 
         ul {
@@ -46,20 +47,18 @@ $shadow: rgb(219, 218, 218);
             margin: 0 8px;
           }
           .active-btn {
-            background: $color-1;
-
-            &:hover {
-              background: $color-2;
-            }
+            background: $black;
           }
           li:not(.active-btn) {
             &:hover {
-              transform: translateX(3px);
+              color: gray;
+              background: whitesmoke;
             }
           }
         }
         form {
           input {
+            background: $color-4;
             padding: 10px 14px;
             margin: 0;
             font-size: 1.2rem;
@@ -70,6 +69,7 @@ $shadow: rgb(219, 218, 218);
             }
           }
           input[type="submit"] {
+            font-size: smaller;
             padding: 14px 14px;
             border-radius: 20px;
           }
