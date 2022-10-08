@@ -7,6 +7,9 @@ export const UPDATE_BIO = "UPDATE_BIO";
 export const FOLLOW_USER = "FOLLOW_USER";
 export const UNFOLLOW_USER = "UNFOLLOW_USER";
 
+// on implémente la logique pour traiter les "error" 
+export const GET_USER_ERRORS = "GET_USER_ERRORS";
+
 // on affiche le "user"
 export const getUser = (uid) => {
     return (dispatch) => {
@@ -25,11 +28,16 @@ export const uploadPicture = (data, id) => {
         return axios
             .post("http://localhost:8000/api/user/upload", data) // on envoie la data vers le "back"
             .then((res) => {
-                return axios
-                    .get(`http://localhost:8000/api/user/${id}`) // on récupère la "data" depuis le "back"
-                    .then((res) => {
-                        dispatch({ type: UPLOAD_PICTURE, payload: res.data.picture }) // on met à jour l'image
-                    });
+                if (res.data.errors) { // si la "réponse" contient des "error"
+                    dispatch({ type: GET_USER_ERRORS, payload: res.data.errors }); // on traite les "error"
+                } else { // on réinitialise le "store"
+                    dispatch({ type: GET_USER_ERRORS, payload: "" });
+                    return axios
+                        .get(`http://localhost:8000/api/user/${id}`) // on récupère la "data" depuis le "back"
+                        .then((res) => {
+                            dispatch({ type: UPLOAD_PICTURE, payload: res.data.picture }) // on met à jour l'image
+                        });
+                }
             })
             .catch((err) => console.log(err));
     }

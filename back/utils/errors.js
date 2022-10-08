@@ -42,7 +42,7 @@ exports.uploadErrors = (error) => {
         errors.format = "Format non correct";
 
     if (error.message.includes('max size'))
-        errors.maxSize = "Le fichier dépasse 500ko";
+        errors.maxSize = "taille max 500ko";
 
     return errors
 }

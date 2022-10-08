@@ -2,6 +2,8 @@ import axios from 'axios';
 
 // les actions "posts"
 export const GET_POSTS = "GET_POSTS";
+export const GET_ALL_POSTS = "GET_ALL_POSTS";
+export const ADD_POST = "ADD_POST";
 export const LIKE_POST = "LIKE_POST";
 export const UNLIKE_POST = "UNLIKE_POST";
 export const UPDATE_POST = "UPDATE_POST";
@@ -12,6 +14,11 @@ export const ADD_COMMENT = "ADD_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 
+// les tendances
+export const GET_TRENDS = "GET_TRENDS";
+
+// la gestion des "errors" de "post"
+export const GET_POST_ERRORS = "GET_POST_ERRORS";
 
 // on récupère les "posts"
 export const getPosts = (num) => {
@@ -21,9 +28,25 @@ export const getPosts = (num) => {
             .then((res) => { // puis "dispatch" dans le store
                 const array = res.data.slice(0, num) // on déclare dans un [] les 5 premiers "post"
                 dispatch({ type: GET_POSTS, payload: array }) // on transmet au "reducer" (redux) 
+                dispatch({ type: GET_ALL_POSTS, payload: res.data }) // on transmet au "reducer" la totalité des "post" 
             })
             .catch((err) => console.log(err))
     }
+};
+
+// on implémente la logique pour ajouter un "post"
+export const addPost = (data) => {
+    return (dispatch) => {
+        return axios // on passe les "data" via la méthode "post"
+            .post("http://localhost:8000/api/post/", data)
+            .then((res) => { // si dans "res" on a des "errors"
+                if (res.data.errors) { // on traitera les actions via redux
+                    dispatch({ type: GET_POST_ERRORS, payload: res.data.errors });
+                } else { // on réinitialise le "store" 
+                    dispatch({ type: GET_POST_ERRORS, payload: "" });
+                }
+            });
+    };
 };
 
 // on implémente la logique du "like"
@@ -127,5 +150,12 @@ export const deleteComment = (postId, commentId) => {
                 dispatch({ type: DELETE_COMMENT, payload: { postId, commentId } });
             })
             .catch((err) => console.log(err));
+    };
+};
+
+// on implémente la logique pour stocker les 5 "posts" les plus likés
+export const getTrends = (sortedArray) => {
+    return (dispatch) => { // on met à disposition les "data"
+        dispatch({ type: GET_TRENDS, payload: sortedArray });
     };
 };

@@ -123,7 +123,6 @@ const Card = ({ post }) => {
                             </div>
                             {/* on récupère en "props" les "data" */}
                             <LikeButton post={post} />
-                            <img src="./img/icons/share.svg" alt="partager" />
                         </div>
                         {/* si "showComments" = true => on affichera le composant <CardComments /> */}
                         {showComments && <CardComments post={post} />}

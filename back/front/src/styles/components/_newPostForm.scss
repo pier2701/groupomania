@@ -103,6 +103,7 @@ $shadow: rgb(219, 218, 218);
               left: 68px;
             }
             @media screen and (max-width: 440px) {
+              font-size: smaller;
               left: 14px;
               top: 60px;
             }
@@ -137,22 +138,36 @@ $shadow: rgb(219, 218, 218);
         cursor: pointer;
         width: 40px;
         height: 30px;
-
         img {
+          //background: $black;
           position: absolute;
+          left: 15px;
           height: 40px;
-          width: 70px;
+          width: 40px;
+          border-radius: 10px;
           transform: translate(-18px, -1px);
+          //border: $color-2 solid 2px;
         }
 
         button {
-          width: 190px;
-          padding: 10px 20px;
+          margin-left: 5px;
+          width: 60px;
+          height: 35px;
+          border-radius: 50px;
+          padding: 4px;
           background: $white;
-          transition: 0.2s;
-
+          transition: 0.4s;
+          img {
+            position: relative;
+            top: 0px;
+            left: 20px;
+            width: 30px;
+            height: 30px;
+          }
           &:hover {
-            background: $color-3;
+            background: $shadow;
+            border-left: #fd2d01 solid 5px;
+            border-right: #fd2d01 solid 5px;
           }
         }
 
@@ -161,19 +176,24 @@ $shadow: rgb(219, 218, 218);
           height: 30px;
           position: absolute;
           top: 7px;
-          right: -27px;
+          right: -7px;
           transform: translate(-16px, -3px);
           opacity: 0;
           cursor: pointer;
-
           &::-webkit-file-upload-button {
             cursor: pointer;
           }
         }
       }
       p {
-        margin-top: 4px;
-        color: red;
+        margin-top: 1px;
+        color: #fd2d01;
+        @media screen and (max-width: 460px) {
+          width: 50px;
+          height: 30px;
+          line-height: 12px;
+          font-size: 12px;
+        }
       }
       .btn-send {
         display: flex;
@@ -192,7 +212,7 @@ $shadow: rgb(219, 218, 218);
         button {
           @media screen and (max-width: 460px) {
             font-size: 0.7rem;
-            margin-top: 5px;
+            margin-top: 3px;
             padding: 8px;
           }
         }

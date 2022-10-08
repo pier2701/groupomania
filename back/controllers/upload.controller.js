@@ -28,7 +28,7 @@ exports.uploadProfileImage = async (req, res) => {
     } catch (error) {
         // on récupère les erreurs pour les afficher dans le front
         const errors = uploadErrors(error);
-        return res.status(401).json({ errors });
+        return res.status(201).json({ errors });
     }
 
     // on renomme notre image avec le même nom en jpg

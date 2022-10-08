@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty, timestampParser } from "../Utils";
-import { NavLink } from "react-router-dom";
+import { addPost, getPosts } from "../../actions/post.actions";
 
 const NewPostForm = () => {
     // on met en place le "loading-spinner"
@@ -10,33 +10,48 @@ const NewPostForm = () => {
     // on déclare la logique du "message"
     const [message, setMessage] = useState("");
 
-    // on déclare la logique d'une "photo"
+    // on déclare la logique d'une "image" pour le "front"
     const [postPicture, setPostPicture] = useState(null);
 
     // on déclare la logique d'une "video"
-    const [video, setVideo] = useState();
+    const [video, setVideo] = useState("");
 
-    // on déclare la logique d'une "image"
+    // on déclare la logique de la gestion d'une "image" à envoyer au "back"
     const [file, setFile] = useState();
 
     // on met à disposition le "store" ("userReducer")
     const userData = useSelector((state) => state.userReducer);
 
-    //
-    //const error = useSelector((state) => state.errorReducer.postError);
+    // on met à disposition le "store" ("errorReducer")
+    const error = useSelector((state) => state.errorReducer.postError);
 
-    //
+    // on appelle la fonction pour passer les "actions"
     const dispatch = useDispatch();
+
+    // on implémente la logique pour transmettre les "data" à la base de données
+    const handlePost = async () => {
+        // on vérifie s'il y a du contenu
+        if (message || postPicture || video) {
+            const data = new FormData(); // on déclare les "data" à envoyer au "back"
+            data.append('userId', userData._id);
+            data.append('message', message);
+            if (file) data.append("file", file);
+            data.append('video', video);
+
+            await dispatch(addPost(data)); // on met à disposition "addPost" pour envoyer "data"
+            dispatch(getPosts()); // on met à jour les "posts"
+            cancelPost(); // on remet les champs de saisies à jour
+        } else {
+            alert('votre "post" est vide 📭')
+        }
+    };
 
 
     // on implémente la gestion de l'image au "click"
-    const handlePicture = (e) => {
-
-    };
-
-    //
-    const handlePost = () => {
-
+    const handlePicture = (e) => { // la logique permet de prévisualiser l'image
+        setPostPicture(URL.createObjectURL(e.target.files[0]));
+        setFile(e.target.files[0]); // on rend l'image disponible via des requêtes ("req.file")
+        setVideo(""); // s'il y a une "video", elle sera enlevée
     };
 
     // on implémente la logique pour annuler un "post"
@@ -51,7 +66,28 @@ const NewPostForm = () => {
     useEffect(() => {
         if (!isEmpty(userData))
             setIsLoading(false);
-    }, [userData]); // si la "data" évolue, on relance la fonction
+
+        // on implémente la logique pour gérer une "video"
+        const handleVideo = () => {
+            let findLink = message.split(" "); // on sépare le "message" par un espace
+            for (let i = 0; i < findLink.length; i++) {
+                if ( // si on trouve des liens avec "youtube"
+                    findLink[i].includes("https://www.youtube") ||
+                    findLink[i].includes("https://youtube")
+                ) { // on rend la "video" accessible dans l'application
+                    let embed = findLink[i].replace("watch?v=", "embed/");
+                    setVideo(embed.split("&")[0]); // on "split" au niveau du "&" et on garde le début
+                    findLink.splice(i, 1); // on splice et supprime le lien "video"
+                    setMessage(findLink.join(" ")); // on transmet la "video" sous forme de caractères 
+                    setPostPicture(''); // s'il y a une photo, elle sera enlevée
+                }
+            }
+        };
+
+        handleVideo(); // on lance la fonction s'il y a une "video"
+    }, [userData, message, video]); // si la "data" évolue, on relance la fonction
+
+
 
     return (
         <div className="post-container">
@@ -90,7 +126,7 @@ const NewPostForm = () => {
                         {message || postPicture || video > 20 ? (
                             <li className="card-container">
                                 <div className="card-left">
-                                    <img src={userData.picture} alt="user" />
+                                    <img src={userData.picture} alt="photo du profil" />
                                 </div>
                                 <div className="card-right">
                                     <div className="card-header">
@@ -109,8 +145,8 @@ const NewPostForm = () => {
                                                 frameBorder="0"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                 allowFullScreen
-                                                title={video}
-                                            ></iframe>
+                                                title="Youtube Player">
+                                            </iframe>
                                         )}
                                     </div>
                                 </div>
@@ -118,7 +154,7 @@ const NewPostForm = () => {
                         ) : null}
                         <div className="footer-form">
                             <div className="icon">
-                                {isEmpty(video) && (
+                                {isEmpty(video) && ( // sans lien "video", on propose l'icône "images"
                                     <>
                                         <img src="./img/icons/picture.svg" alt="icon image" />
                                         <input
@@ -130,12 +166,16 @@ const NewPostForm = () => {
                                         />
                                     </>
                                 )}
-                                {video && (
+                                {video && ( // si on a un contenu "video"
                                     <button onClick={() => setVideo("")}>
-                                        Supprimer vidéo
+                                        {/* on propose l'option de suppression "video" */}
+                                        <img src="./img/icons/delete.png" alt="annuler la vidéo" />
                                     </button>
                                 )}
                             </div>
+                            {/* on affiche les "error" s'il y en a */}
+                            {!isEmpty(error.format) && <p>{error.format}</p>}
+                            {!isEmpty(error.maxSize) && <p>{error.maxSize}</p>}
                             <div className="btn-send">
                                 {/* on déclare les conditions pour "annuler" un post */}
                                 {message || postPicture || video > 20 ? (

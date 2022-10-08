@@ -19,6 +19,9 @@ const UpdateProfil = () => {
     // on récupère les "data" via redux
     const usersData = useSelector((state) => state.usersReducer)
 
+    // on récupère la logique de la gestion "error" via redux
+    const error = useSelector((state) => state.errorReducer.userError);
+
     // on redistribue la "data" via redux
     const dispatch = useDispatch();
 
@@ -43,6 +46,9 @@ const UpdateProfil = () => {
                     {/* on change dynamiquement la photo */}
                     <img src={userData.picture} alt="avatar" />
                     <UploadImg />
+                    {/* on implémente les messages "error" */}
+                    <p>{error.maxSize}</p>
+                    <p>{error.format}</p>
                 </div>
                 <div className="right-part">
                     <div className="bio-update">

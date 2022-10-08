@@ -1,19 +1,21 @@
-$color-1: #ff7b77;
-$color-2: #ffd0c4;
+$color-1: #ffd7d7;
+$color-2: #5e627d;
 $color-3: rgb(0, 22, 44);
 $color-4: #fdeeee;
-$black: rgb(40, 40, 40);
+$black: #393b49;
 $white: rgb(253, 253, 253);
 $shadow: rgb(219, 218, 218);
 .get-friends-container {
   width: 356px;
-  background: linear-gradient(145deg, $color-2 30%, #ffe1d9 100%);
+  background: $color-2;
   border-radius: 20px;
-  padding: 20px 20px 10px;
+  border: $color-1 solid 2px;
+  padding: 15px;
 
   h4 {
+    text-align: center;
     font-size: 1.4rem;
-    color: $color-3;
+    color: $color-1;
   }
   .icon {
     margin: 16px auto;
@@ -37,28 +39,31 @@ $shadow: rgb(219, 218, 218);
       img {
         height: 46px;
         width: 46px;
-        border-radius: 12px;
+        border-radius: 50px;
         object-fit: cover;
-        box-shadow: 0 0 2px rgba(51, 51, 51, 0.377);
       }
       p {
         text-align: left;
         font-size: 0.9rem;
       }
       span {
-        text-align: right;
+        text-align: center;
 
         button {
-          background: $color-1;
+          width: 90px;
+          background: $black;
           color: $color-4;
           padding: 10px 24px 8px;
           transition: 0.2s;
           border-radius: 20px;
+          border-top: $color-1 solid 2px;
+          border-bottom: $color-1 solid 2px;
           font-size: 0.9rem;
 
           &:hover {
+            border: #fd2d01 solid 0.1px;
             background: $color-4;
-            color: $color-1;
+            color: $color-2;
           }
         }
       }

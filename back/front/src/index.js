@@ -10,6 +10,7 @@ import { applyMiddleware } from "redux";
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from "redux-devtools-extension";
 import { getUsers } from './actions/users.actions';
+import { getPosts } from './actions/post.actions';
 
 const middleware = [thunkMiddleware];
 const middlewareEnhancer = applyMiddleware(...middleware)
@@ -21,7 +22,10 @@ const store = configureStore({
 });
 
 // on met à disposition les "user"
-store.dispatch(getUsers())
+store.dispatch(getUsers());
+
+// on met à disposition les "post"
+store.dispatch(getPosts);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

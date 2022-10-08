@@ -4,6 +4,9 @@ import LeftNav from '../components/LeftNav';
 import NewPostForm from "../components/Post/NewPostForm";
 import Thread from '../components/Thread';
 import Log from "../components/Log";
+import Trends from '../components/Trends';
+import FriendsList from "../components/Profil/FriendsList";
+
 
 const Home = () => {
     // on vérifie si le "user" est connecté
@@ -18,6 +21,14 @@ const Home = () => {
                     {uid ? <NewPostForm /> : <Log signin={true} signup={false} />}
                 </div>
                 <Thread />
+            </div>
+            <div className="right-side">
+                <div className="right-side-container">
+                    <div className="wrapper">
+                        <Trends />
+                        {uid && <FriendsList />}
+                    </div>
+                </div>
             </div>
         </div>
     );

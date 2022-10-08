@@ -53,7 +53,7 @@ exports.createPost = async (req, res) => {
         await pipeline(
             req.file.stream,
             fs.createWriteStream(
-                `${__dirname}/../images/post/${fileName}`
+                `${__dirname}/../front/public/uploads/posts/${fileName}`
             )
         );
     }
@@ -62,17 +62,18 @@ exports.createPost = async (req, res) => {
         userId: req.body.userId,
         message: req.body.message,
         // le champ sera vide s'il n'y a pas d'image
-        imageUrl: req.file !== null ? "./images/post/" + fileName : "",
+        imageUrl: req.file !== null ? "./uploads/posts/" + fileName : "",
         video: req.body.video,
         likers: [],
         comments: [],
     });
-
+    console.log("le newPost : " + newPost)
     try {
         // // on enregistre l'objet dans la base avec la méthode "save()"
         const post = await newPost.save();
         return res.status(201).json(post);
-    } catch (err) {
+    }
+    catch (err) {
         return res.status(400).send(err);
     }
 };

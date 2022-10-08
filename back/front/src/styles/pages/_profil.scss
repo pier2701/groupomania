@@ -277,7 +277,8 @@ $shadow: rgb(219, 218, 218);
         }
       }
       p {
-        color: #fd2d01;
+        font-weight: 900;
+        color: lighten($color: #fd2b01, $amount: 30);
         margin-top: 6px;
       }
     }
@@ -353,12 +354,6 @@ $shadow: rgb(219, 218, 218);
     position: fixed;
     animation: popup 1s forwards;
     transition: 2s;
-
-    @keyframes popup {
-      to {
-        backdrop-filter: blur(4px);
-      }
-    }
 
     .modal {
       position: absolute;
