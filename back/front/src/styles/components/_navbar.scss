@@ -42,8 +42,9 @@ nav {
     align-items: center;
 
     .logo {
-      display: flex;
-      align-items: center;
+      margin-left: 43%;
+      // display: flex;
+      // align-items: center;
 
       h3 {
         transform: translate(15px, 2px);
@@ -65,6 +66,7 @@ nav {
       font-size: 1.2rem;
 
       .welcome {
+        margin-left: 54.5%;
         transform: translateY(2px);
 
         @media screen and (max-width: 590px) {

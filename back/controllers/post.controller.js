@@ -20,6 +20,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 const { json } = require("express");
 
 const { error } = require("console");
+const { send } = require("process");
 
 
 // on exporte les méthodes "Post"
@@ -63,11 +64,10 @@ exports.createPost = async (req, res) => {
         message: req.body.message,
         // le champ sera vide s'il n'y a pas d'image
         imageUrl: req.file !== null ? "./uploads/posts/" + fileName : "",
-        video: req.body.video,
         likers: [],
         comments: [],
     });
-    console.log("le newPost : " + newPost)
+    console.log("newPost : " + newPost)
     try {
         // // on enregistre l'objet dans la base avec la méthode "save()"
         const post = await newPost.save();
@@ -127,7 +127,14 @@ exports.deletePost = (req, res) => {
     Post.findByIdAndRemove(
         req.params.id,
         (error, data) => {
-            if (!error) res.send(data);
+            if (!error) {
+                res.send(data);
+                const imageUrl = data.imageUrl.split("/uploads/")[1];
+                fs.unlink("front/public/uploads/" + imageUrl, (err) => {
+                    if (err) throw err;
+                    console.log('image supprimée');
+                });
+            }
             else console.log("erreur dans 'delete' : " + error);
         });
 }

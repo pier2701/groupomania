@@ -239,12 +239,7 @@ nav .nav-container {
           align-items: center;
 }
 nav .nav-container .logo {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  margin-left: 43%;
 }
 nav .nav-container .logo h3 {
   -webkit-transform: translate(15px, 2px);
@@ -273,6 +268,7 @@ nav .nav-container ul {
   font-size: 1.2rem;
 }
 nav .nav-container ul .welcome {
+  margin-left: 54.5%;
   -webkit-transform: translateY(2px);
           transform: translateY(2px);
 }
@@ -1840,8 +1836,12 @@ nav .nav-container ul li img {
 
 .left-nav-container {
   position: relative;
+  bottom: 57px;
 }
 .left-nav-container .icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   position: fixed;
   z-index: 10;
 }
@@ -1851,6 +1851,13 @@ nav .nav-container ul li img {
   }
 }
 .left-nav-container .icons .icons-bis {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   position: absolute;
   left: 10px;
 }
@@ -1867,11 +1874,12 @@ nav .nav-container ul li img {
   -webkit-transform-origin: center;
           transform-origin: center;
   z-index: -10;
-  content: "";
+  content: "accueil";
   height: 45px;
   width: 45px;
   position: absolute;
   background: #fdeeee;
+  color: rgb(0, 22, 44);
   border-radius: 50px;
   border: #ff7b77 solid 1px;
 }

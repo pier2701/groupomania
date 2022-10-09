@@ -84,8 +84,7 @@ const Card = ({ post }) => {
                             <div className="update-post">
                                 <textarea
                                     defaultValue={post.message} // message initial
-                                    onChange={(e) => setTextUpdate(e.target.value)} // au click le nouveau "text"
-                                />
+                                    onChange={(e) => setTextUpdate(e.target.value)} />
                                 <div className="button-container">
                                     <button className='btn' onClick={updateItem}>
                                         Changer le message
@@ -95,17 +94,6 @@ const Card = ({ post }) => {
                         )}
                         {/* on implémente nos fichiers */}
                         {post.imageUrl && <img src={post.imageUrl} alt="image du post" className='card-pic' />}
-                        {post.video && (
-                            <iframe
-                                width="500"
-                                height="300"
-                                src={post.video}
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                                title={post._id}>
-                            </iframe>
-                        )}
                         {userData._id === post.userId && ( // on vérifie que les 2 id soient identiques
                             <div className="button-container">
                                 <div onClick={() => setIsUpdated(!isUpdated)}>

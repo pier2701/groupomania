@@ -7,8 +7,10 @@ $white: rgb(253, 253, 253);
 $shadow: rgb(219, 218, 218);
 .left-nav-container {
   position: relative;
+  bottom: 57px;
 
   .icons {
+    display: flex;
     position: fixed;
     z-index: 10;
 
@@ -17,6 +19,8 @@ $shadow: rgb(219, 218, 218);
     }
 
     .icons-bis {
+      display: flex;
+      flex-direction: row;
       position: absolute;
       left: 10px;
       a {
@@ -28,11 +32,12 @@ $shadow: rgb(219, 218, 218);
           transform: scale(0);
           transform-origin: center;
           z-index: -10;
-          content: "";
+          content: "accueil";
           height: 45px;
           width: 45px;
           position: absolute;
           background: $color-4;
+          color: $color-3;
           border-radius: 50px;
           border: #ff7b77 solid 1px;
         }
