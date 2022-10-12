@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { deleteComment, editComment } from '../../actions/post.actions';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { UidContext } from "../AppContext";
 
 const EditDeleteComment = ({ comment, postId }) => {
@@ -18,6 +18,9 @@ const EditDeleteComment = ({ comment, postId }) => {
 
     // on met à disposition les actions via le "hook"
     const dispatch = useDispatch();
+
+    // on récupère le userData via le "store"
+    const userData = useSelector((state) => state.userReducer);
 
     // on implémente au "click" la modification
     const handleEdit = (e) => {
@@ -50,13 +53,18 @@ const EditDeleteComment = ({ comment, postId }) => {
     return (
         <div className="edit-comment">
             {/* si "isAuthor" = true */}
-            {isAuthor && edit === false && ( // au click on affichera le champ "edit"
+            {isAuthor && edit === false && userData.admin === false && ( // au click on affichera le champ "edit"
                 // on affichera l'édition de texte sous ces 2 conditions
                 <span onClick={() => setEdit(!edit)}>
                     <img src="./img/icons/edit.svg" alt="edit-comment" />
                 </span>
             )}
-            {isAuthor && edit && ( // si "edit" = true, au "click" on affichera l'icône 
+            {userData.admin === true && edit === false && (
+                <span onClick={() => setEdit(!edit)}>
+                    <img src="./img/icons/edit.svg" alt="edit-comment" />
+                </span>
+            )}
+            {isAuthor && edit && userData.admin === false && ( // si "edit" = true, au "click" on affichera l'icône 
                 <form action="" onSubmit={handleEdit} className="edit-comment-form">
                     <label htmlFor="text" onClick={() => setEdit(!edit)}>
                         modifier le texte
@@ -83,6 +91,33 @@ const EditDeleteComment = ({ comment, postId }) => {
                         </span></div>
                     <input type="submit" value="confirmer" />
 
+                </form>
+            )}
+            {userData.admin === true && edit && (
+                <form action="" onSubmit={handleEdit} className="edit-comment-form">
+                    <label htmlFor="text" onClick={() => setEdit(!edit)}>
+                        modifier le texte
+                    </label>
+                    <br />
+                    <input
+                        type="text"
+                        name="text"
+                        onChange={(e) => setText(e.target.value)}
+                        defaultValue={comment.text}
+                    />
+                    <br />
+                    <div className="btn">
+                        <span
+                            onClick={() => {
+                                if (window.confirm("Confirmer la suppression de ce commentaire ?")) {
+                                    handleDelete();
+                                }
+                            }}
+                        >
+                            <img src="./img/icons/trash.svg" alt="delete" />
+                        </span>
+                        <input type="submit" value="modifier" />
+                    </div>
                 </form>
             )}
         </div>

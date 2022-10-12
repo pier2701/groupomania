@@ -26,7 +26,8 @@ const Navbar = () => {
                         <li className='welcome'>
                             <NavLink to="/profil">
                                 {/* on passe la "data" */}
-                                <h5>{userData.pseudo} 👤</h5>
+                                {(userData.admin === true) && <h5>Admin</h5>}
+                                {(userData.admin === false) && <h5>{userData.pseudo} 👤</h5>}
                             </NavLink>
                         </li>
                         <Logout />

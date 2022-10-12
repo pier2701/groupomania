@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Log from '../components/Log';
 import { UidContext } from '../components/AppContext';
 import UpdateProfil from '../components/Profil/UpdateProfil';
+import { useRouteLoaderData } from 'react-router-dom';
 
 const Profil = () => {
     // on déclare notre vérification "user" 

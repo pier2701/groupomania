@@ -33,7 +33,6 @@ const Trends = () => {
             });
             // on adaptera l'affichage si le "user" est connecté ou pas
             (!isEmpty(uid)) ? sortedArray.length = 3 : sortedArray.length = 7;
-            console.log(uid)
             // on transmet les "data" au "store"
             dispatch(getTrends(sortedArray));
         }

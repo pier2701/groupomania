@@ -83,6 +83,7 @@ const NewPostForm = () => {
                     {/* le "user" peut être rediriger vers sa page profil */}
                     <div className="user-info">
                         <img src={userData.picture} alt="photo du profil" />
+                        {userData.admin === true && (<p>Rôle administrateur</p>)}
                     </div>
                     <div className="post-form">
                         <textarea

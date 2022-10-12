@@ -7,7 +7,6 @@ import { updatePost } from '../../actions/post.actions';
 import DeleteCard from './DeleteCard';
 import CardComments from './CardComments';
 
-
 const Card = ({ post }) => {
     // on met en place un loading spinner
     const [isLoading, setIsLoading] = useState(true);
@@ -17,6 +16,9 @@ const Card = ({ post }) => {
 
     // on implémente une variable pour sauvegarder le nouveau "text"
     const [textUpdate, setTextUpdate] = useState(null);
+
+    // on déclare la logique de la gestion d'une "image" à envoyer au "back"
+    //const [file, setFile] = useState();
 
     // on implémente la logique pour afficher les commentaires
     const [showComments, setShowComments] = useState(false);
@@ -31,7 +33,12 @@ const Card = ({ post }) => {
     const dispatch = useDispatch();
 
     // on implémente la fonction pour mettre à jour le "text"
-    const updateItem = async () => {
+    const updateItem = () => {
+        // const data = new FormData();
+        // // data.append("name", userData.pseudo);
+        // // data.append("userId", userData._id);
+        // data.append('message', message);
+        // data.append("file", file);
         if (textUpdate) { // s'il y a du contenu à modifier
             dispatch(updatePost(post._id, textUpdate)) // mise à jour du "text" via le userId du post
         }
@@ -77,6 +84,20 @@ const Card = ({ post }) => {
                             </div>
                             {/* on implémente la date via "dateParser" */}
                             <span>{dateParser(post.createdAt)}</span>
+                            {/* on implémente le nombre d'abonnés et d'abonnements */}
+                            <span className='follow'>
+                                {!isEmpty(usersData[0]) &&
+                                    usersData.map((user) => {
+                                        if (user._id === post.userId) return user.following.length;
+                                        else return null;
+                                    }).join("")} abonnements
+                                <br />
+                                {!isEmpty(usersData[0]) &&
+                                    usersData.map((user) => {
+                                        if (user._id === post.userId) return user.followers.length;
+                                        else return null;
+                                    }).join("")} abonnés
+                            </span>
                         </div>
                         {/* s'il n'y a pas de modifications => false && <p> */}
                         {isUpdated === false && <p>{post.message}</p>}
@@ -85,6 +106,20 @@ const Card = ({ post }) => {
                                 <textarea
                                     defaultValue={post.message} // message initial
                                     onChange={(e) => setTextUpdate(e.target.value)} />
+
+                                {/* <div className="icon">
+                                    <>
+                                        <img src="./img/icons/picture.svg" alt="img" />
+                                        <input
+                                            type="file"
+                                            id="file-upload"
+                                            name="file"
+                                            accept=".jpg, .jpeg, .png"
+                                            onChange={(e) => setFile(e.target.files[0])}
+                                        />
+                                    </>
+                                </div> */}
+
                                 <div className="button-container">
                                     <button className='btn' onClick={updateItem}>
                                         Changer le message
@@ -94,11 +129,19 @@ const Card = ({ post }) => {
                         )}
                         {/* on implémente nos fichiers */}
                         {post.imageUrl && <img src={post.imageUrl} alt="image du post" className='card-pic' />}
-                        {userData._id === post.userId && ( // on vérifie que les 2 id soient identiques
+                        {userData._id === post.userId && userData.admin === false && ( // on vérifie que les 2 id soient identiques
                             <div className="button-container">
                                 <div onClick={() => setIsUpdated(!isUpdated)}>
                                     {/* on inverse les états au click => toggle  */}
                                     <img src="./img/icons/edit.svg" alt="changer le texte" />
+                                </div>
+                                <DeleteCard id={post._id} />
+                            </div>
+                        )}
+                        {userData.admin === true && (
+                            <div className="button-container">
+                                <div onClick={() => setIsUpdated(!isUpdated)}>
+                                    <img src="./img/icons/edit.svg" alt="edit" />
                                 </div>
                                 <DeleteCard id={post._id} />
                             </div>

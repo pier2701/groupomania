@@ -42,10 +42,10 @@ nav {
     align-items: center;
 
     .logo {
-      margin-left: 43%;
-      // display: flex;
-      // align-items: center;
-
+      margin-left: 47%;
+      @media screen and (max-width: 590px) {
+        margin-left: 37%;
+      }
       h3 {
         transform: translate(15px, 2px);
         font-size: 1.5rem;
@@ -87,15 +87,15 @@ nav {
       }
     }
   }
-}
 
-.icon_log:hover {
-  background-color: #ff7b77;
-  transform-origin: center;
-  transform: scale(1.5);
-  transition: 0.2s;
-  padding: 5px;
-  margin: auto;
-  border: 1px solid #4e5166;
-  border-radius: 50px;
+  .icon_log:hover {
+    background-color: #ff7b77;
+    transform-origin: center;
+    transform: scale(1.5);
+    transition: 0.2s;
+    padding: 5px;
+    margin: auto;
+    border: 1px solid #4e5166;
+    border-radius: 50px;
+  }
 }

@@ -239,7 +239,12 @@ nav .nav-container {
           align-items: center;
 }
 nav .nav-container .logo {
-  margin-left: 43%;
+  margin-left: 47%;
+}
+@media screen and (max-width: 590px) {
+  nav .nav-container .logo {
+    margin-left: 37%;
+  }
 }
 nav .nav-container .logo h3 {
   -webkit-transform: translate(15px, 2px);
@@ -288,8 +293,7 @@ nav .nav-container ul li img {
   justify-items: center;
   height: 100%;
 }
-
-.icon_log:hover {
+nav .icon_log:hover {
   background-color: #ff7b77;
   -webkit-transform-origin: center;
           transform-origin: center;
@@ -428,6 +432,28 @@ nav .nav-container ul li img {
 }
 .card-container .card-right .card-header .pseudo span .far {
   color: #ffd7d7;
+}
+.card-container .card-right .card-header .follow {
+  color: #ffd7d7;
+  font-style: normal;
+  font-weight: bolder;
+}
+.card-container .card-right .card-header .follow img {
+  height: 15px;
+  width: 15px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+@media screen and (max-width: 440px) {
+  .card-container .card-right .card-header .follow img {
+    height: 37px;
+    width: 37px;
+  }
+}
+@media screen and (max-width: 640px) {
+  .card-container .card-right .card-header .follow {
+    display: none;
+  }
 }
 .card-container .card-right .card-header span {
   font-style: italic;
@@ -662,10 +688,6 @@ nav .nav-container ul li img {
   transition: 0.4s;
   display: inline-block;
 }
-.card-container .card-right .comment-container .edit-comment .edit-comment-form label:hover {
-  -webkit-transform: scale(1.05);
-          transform: scale(1.05);
-}
 .card-container .card-right .comment-container .edit-comment .edit-comment-form input[type=text] {
   margin: 4px 0;
   background: #fdeeee;
@@ -681,12 +703,12 @@ nav .nav-container ul li img {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   float: right;
 }
 .card-container .card-right .comment-container .edit-comment .edit-comment-form .btn span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   border: #fd2d01 solid 0.6px;
   padding: 5px 1px;
   border-radius: 50px;
@@ -702,14 +724,14 @@ nav .nav-container ul li img {
           transform: translate(-5px, 0);
 }
 .card-container .card-right .comment-container .edit-comment .edit-comment-form .btn input[type=submit] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   background: #ffd7d7;
   width: inherit;
+  height: 35px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
-}
-.card-container .card-right .comment-container .edit-comment .edit-comment-form .btn input[type=submit]:hover {
-  width: inherit;
-  background: #fd2d01;
 }
 .card-container .card-right .comment-form {
   margin-top: 6px;

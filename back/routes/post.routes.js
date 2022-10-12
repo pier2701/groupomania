@@ -8,11 +8,11 @@ const router = express.Router();
 const multer = require("multer");
 const upload = multer();
 
-// on importe la méthode d'authentification
-//const auth = require("../middleware/auth");
-
 // importation des "post" créé le dossier "controllers"
 const postCtrl = require("../controllers/post.controller");
+
+// on implémente les chemin du rôle "admin"
+const isAdmin = require("../middleware/isAdmin");
 
 // la route vers laquelle nous intercepterons les requêtes de type GET de toutes les posts
 router.get("/", postCtrl.readAllPosts);
@@ -24,10 +24,10 @@ router.get("/:id", postCtrl.getOnePost);
 router.post("/", upload.single("file"), postCtrl.createPost);
 
 // route de type PUT request pour modifier un article
-router.put("/:id", postCtrl.updatePost);
+router.put("/:id", isAdmin, postCtrl.updatePost);
 
 // route de type DELETE request pour supprimer un article
-router.delete("/:id", postCtrl.deletePost);
+router.delete("/:id", isAdmin, postCtrl.deletePost);
 
 // les routes vers laquelle nous intercepterons les requêtes de type PATCH des "like/unlike"
 router.patch('/like/:id', postCtrl.likePost);

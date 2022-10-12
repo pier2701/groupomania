@@ -6,19 +6,17 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { configureStore } from "@reduxjs/toolkit"
 import rootReducer from "./reducers";
-import { applyMiddleware } from "redux";
-import thunkMiddleware from 'redux-thunk'
+import thunk from 'redux-thunk'
+//import logger from 'redux-logger'
 import { composeWithDevTools } from "redux-devtools-extension";
 import { getUsers } from './actions/users.actions';
 import { getPosts } from './actions/post.actions';
 
-const middleware = [thunkMiddleware];
-const middlewareEnhancer = applyMiddleware(...middleware)
 // on met en place le "store"
 const store = configureStore({
   reducer: rootReducer,
   composeWithDevTools,
-  middlewareEnhancer,
+  middleware: [thunk]
 });
 
 // on met à disposition les "user"

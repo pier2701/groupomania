@@ -56,6 +56,7 @@ export const likePost = (postId, userId) => {
             method: "patch",
             url: "http://localhost:8000/api/post/like/" + postId,
             data: { id: userId },
+            withCredentials: true,
         })
             .then((res) => { // on redistribue le "payload"
                 dispatch({ type: LIKE_POST, payload: { postId, userId } }); // on transmet au "reducer" (redux) 
@@ -71,6 +72,7 @@ export const unlikePost = (postId, userId) => {
             method: "patch",
             url: "http://localhost:8000/api/post/unlike/" + postId,
             data: { id: userId },
+            withCredentials: true,
         })
             .then((res) => { // on transmet au "reducer" (redux) 
                 dispatch({ type: UNLIKE_POST, payload: { postId, userId } });
@@ -86,6 +88,7 @@ export const updatePost = (postId, message) => {
             method: "put",
             url: `http://localhost:8000/api/post/${postId}`,
             data: { message },
+            withCredentials: true,
         })
             .then((res) => { // on transmet au "reducer" (redux) 
                 dispatch({ type: UPDATE_POST, payload: { message, postId } });
@@ -100,6 +103,7 @@ export const deletePost = (postId) => {
         return axios({
             method: "delete",
             url: `http://localhost:8000/api/post/${postId}`,
+            withCredentials: true,
         })
             .then((res) => { // on transmet au "reducer" (redux) 
                 dispatch({ type: DELETE_POST, payload: { postId } });
@@ -115,6 +119,7 @@ export const addComment = (postId, commenterId, text, commenterPseudo) => {
             method: "patch",
             url: `http://localhost:8000/api/post/comment-post/${postId}`,
             data: { commenterId, text, commenterPseudo },
+            withCredentials: true,
         })
             .then((res) => { // on transmet au "reducer" (redux) 
                 dispatch({ type: ADD_COMMENT, payload: { postId } });
@@ -130,6 +135,7 @@ export const editComment = (postId, commentId, text) => {
             method: "patch",
             url: `http://localhost:8000/api/post/edit-comment-post/${postId}`,
             data: { commentId, text },
+            withCredentials: true,
         })
             .then((res) => { // on transmet au "reducer" (redux) 
                 dispatch({ type: EDIT_COMMENT, payload: { postId, commentId, text } });
@@ -145,6 +151,7 @@ export const deleteComment = (postId, commentId) => {
             method: "patch", // on ne supprime le [] mais on met à jour
             url: `http://localhost:8000/api/post/delete-comment-post/${postId}`,
             data: { commentId },
+            withCredentials: true,
         })
             .then((res) => { // on transmet au "reducer" (redux) 
                 dispatch({ type: DELETE_COMMENT, payload: { postId, commentId } });
