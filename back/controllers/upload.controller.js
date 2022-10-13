@@ -35,15 +35,15 @@ exports.uploadProfileImage = async (req, res) => {
     // en cas de màj la nouvelle image écrasera l'ancienne
     const fileName = req.body.name + ".jpg";
 
-    // on récupère le fichier qu'on importera dans "../images/profil/"
-    pipeline(
-        req.file.stream, // le fichier est sauvegardé dans "images"
+    // on récupère le fichier qu'on importera dans "../uploads/profil/"
+    await pipeline(
+        req.file.stream, // le fichier est sauvegardé dans "uploads"
         fs.createWriteStream(`${__dirname}/../front/public/uploads/profil/${fileName}`)
     );
 
     try {
         // on met à jour l'image du "user"
-        await User.findByIdAndUpdate(
+        User.findByIdAndUpdate(
             req.body.userId,
             { $set: { picture: "./uploads/profil/" + fileName } }, // le nom du nouveau fichier à jour
             { new: true, upsert: true, setDefaultsOnInsert: true })

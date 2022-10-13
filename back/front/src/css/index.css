@@ -62,7 +62,6 @@ input[type=submit] {
   cursor: pointer;
   -webkit-transition: 0.2s;
   transition: 0.2s;
-  margin: 0;
   padding: 7px 10px;
   cursor: pointer;
   font-size: 1.1rem;
@@ -1695,11 +1694,11 @@ nav .icon_log:hover {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 65%;
+  width: 67%;
 }
 .post-container .post-form .footer-form .btn-send .cancel {
   border-radius: 0 0 20px 20px;
-  margin-right: 8px;
+  margin-right: 12px;
   background: rgb(253, 253, 253);
 }
 .post-container .post-form .footer-form .btn-send .cancel:hover {

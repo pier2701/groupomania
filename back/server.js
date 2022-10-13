@@ -40,7 +40,7 @@ const apiLimiter = rateLimit({
 const cors = require("cors");
 const options = {
     // on détermine la source qui est autorisé à faire des requêtes
-    origin: process.env.CLIENT_URL,
+    origin: process.env.FRONT_URL,
     credentials: true,
     'allowedHeaders': ['sessionId', 'Content-Type'],
     'exposedHeaders': ['sessionId'],
@@ -54,8 +54,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 
-// mise en place d'une route pour les fichiers "static" (images)
-app.use("/posts", express.static(path.join(__dirname, "uploads")));
+// mise en place d'une route pour les fichiers "static" (uploads)
+app.use("/upload", express.static(path.join(__dirname, "uploads")));
 
 // on met en place le module qui nous pernet de lire les "cookies" 
 app.use(cookieParser());

@@ -4,7 +4,7 @@ import { getTrends } from "../actions/post.actions";
 import { isEmpty } from "./Utils";
 import { NavLink } from "react-router-dom";
 import FriendsHint from "./Profil/FriendsList";
-import { UidContext } from "../components/AppContext";
+import { UidContext } from "./AppContext";
 
 const Trends = () => {
     // on récupère le "userId" 

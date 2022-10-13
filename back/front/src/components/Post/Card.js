@@ -76,6 +76,12 @@ const Card = ({ post }) => {
                                             if (user._id === post.userId) return user.pseudo;
                                             else return null;
                                         }).join("")}
+                                    <br />
+                                    {/* {!isEmpty(usersData[0]) &&
+                                        usersData.map((user) => {
+                                            if (user._id === post.userId) return user.bio;
+                                            else return null;
+                                        }).join("")} */}
                                 </h3>
                                 {/* on indique la condition pour éviter de s'abonner soi-même */}
                                 {post.userId !== userData._id && (

@@ -31,7 +31,7 @@ exports.updateUser = async (req, res) => {
     try { // sinon on met à jour les données via "$set"
         await UserModel.findOneAndUpdate(
             { _id: req.params.id },
-            { $set: { bio: req.body.bio } },
+            { $set: { bio: req.body.bio, } },
             { new: true, upsert: true, setDefaultsOnInsert: true })
             .then((data) => res.send(data))
             .catch((err) => res.status(500).send({ message: err }));

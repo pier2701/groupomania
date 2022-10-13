@@ -119,77 +119,6 @@ exports.updatePost = (req, res) => {
         }
     );
 
-    // const postObject = req.file ? {
-    //     imageUrl: req.file
-    // } : {
-    //     imageUrl: req.params.imageUrl
-    // };
-    // console.log(req.file);
-    // // on implémente la logique pour supprimer l'ancienne image
-    // // if (req.file !== null) {
-    // //     Post.findOne({ _id: req.params.id }).then((post) => {
-    // //         const imagFile = post.imageUrl.split("/uploads/")[1];
-    // //         console.log("LE POST = " + post)
-    // //         console.log("LE POST userId = " + post.userId)
-    // //         //console.log("LE BODY userId = " + req.body.id)
-    // //         console.log("l'imageUrl = ", imagFile);
-    // //         fs.unlink(`front/public/uploads/${imagFile}`, (err) => {
-    // //             if (err) throw err;
-    // //             console.log('image du Post supprimée');
-    // //         });
-    // //     });
-    // // }
-
-    // Post.findOne({ _id: req.params.id })
-    //     .then(async (post) => {
-    //         //on déclare le nom de notre "image"
-    //         let fileName = req.body.userId + Date.now() + ".jpg";
-    //         // si il y a une image
-    //         if (req.file !== undefined) {
-    //             try {
-    //                 if (
-    //                     // on vérifie son format
-    //                     req.file.detectedMimeType != "image/jpg" &&
-    //                     req.file.detectedMimeType != "image/png" &&
-    //                     req.file.detectedMimeType != "image/jpeg"
-    //                 )
-    //                     throw Error("invalid file");
-
-    //                 if (
-    //                     // on contrôle sa taille
-    //                     req.file.size > 500000
-    //                 )
-    //                     throw Error("max size");
-    //             } catch (error) {
-    //                 // on récupère les erreurs pour les afficher dans le frontend
-    //                 const errors = uploadErrors(error);
-    //                 return res.status(201).json({ errors });
-    //             }
-    //             // on récupère le fichier qu'on importera dans "../images/post/"
-    //             await pipeline(
-    //                 req.file.stream,
-    //                 fs.createWriteStream(
-    //                     `${__dirname}/../front/public/uploads/posts/${fileName}`
-    //                 )
-    //             );
-    //         } else {
-    //             const newPost = {
-    //                 message: req.body.message,
-    //                 imageUrl: req.file !== null ? "./uploads/posts/" + fileName : "",
-    //             };
-
-    //             Post.findByIdAndUpdate(
-    //                 req.params.id,
-    //                 { $set: newPost },
-    //                 { new: true },
-    //                 (err, docs) => {
-    //                     if (!err) res.send(docs);
-    //                     else console.log("Update error : " + err);
-    //                 }
-    //             );
-    //         }
-    //     })
-    //     .catch((error) => res.status(400).json({ error }));
 };
 // méthode pour supprimer un "post"
 exports.deletePost = (req, res) => {
@@ -202,13 +131,15 @@ exports.deletePost = (req, res) => {
         (error, data) => {
             if (!error) {
                 res.send(data);
-                // if (data.imageUrl) {}
-                // console.log("post sans image")
-                const imageUrl = data.imageUrl.split("/uploads/")[1];
-                fs.unlink("front/public/uploads/" + imageUrl, (err) => {
-                    if (err) throw err;
-                    console.log('image supprimée');
-                });
+                if (data.imageUrl) {
+                    const imageUrl = data.imageUrl.split("/uploads/")[1];
+                    fs.unlink("front/public/uploads/" + imageUrl, (err) => {
+                        if (err) throw err;
+                        console.log('image supprimée');
+                    });
+                } else {
+                    console.log("post sans image");
+                }
 
             }
             else console.log("erreur dans 'delete' : " + error);
@@ -216,13 +147,13 @@ exports.deletePost = (req, res) => {
 }
 
 // méthode pour "like" un "post"
-exports.likePost = (req, res) => {
+exports.likePost = async (req, res) => {
     // on vérifie si le "post" existe
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).send("Post inconnu : " + req.params.id);
 
     // on récupère le "post"
-    Post.findByIdAndUpdate(
+    await Post.findByIdAndUpdate(
         req.params.id,
         // on incrémente [likers] du "Post"
         {
@@ -250,13 +181,13 @@ exports.likePost = (req, res) => {
 }
 
 // méthode pour "unlike" un "post"
-exports.unlikePost = (req, res) => {
+exports.unlikePost = async (req, res) => {
     // on vérifie si le "post" existe
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).send("Post inconnu : " + req.params.id);
 
     // on récupère le "post"
-    Post.findByIdAndUpdate(
+    await Post.findByIdAndUpdate(
         req.params.id,
         // on décrémente [likes] du "User"
         {
