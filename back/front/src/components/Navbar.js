@@ -36,8 +36,8 @@ const Navbar = () => {
                             <div className='log-hover'>
                                 <NavLink to="/profil">
                                     <img tabIndex="0" className='icon_log' src="./img/icons/log_in.svg" alt="s'enregistrer" />
+                                    <div className='login-icon'>Se connecter</div>
                                 </NavLink>
-                                <div className='login-icon'>Se connecter</div>
                             </div>
                         </li>
                     </ul>
