@@ -28,7 +28,7 @@ const UploadImg = () => {
     };
     return (
         <form action="" onSubmit={handlePicture} className="upload-pic" encType="multipart/form-data">
-            <label htmlFor="file">Changer d'avatar</label>
+            <label tabIndex="0" htmlFor="file">Changer d'avatar</label>
             <br />
             <input
                 type='file'

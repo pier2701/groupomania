@@ -40,17 +40,17 @@ const LikeButton = ({ post }) => {
         <div className="like-container">
             {uid === null && ( // condition "connecté" pour "liker/disliker" un post
                 <Popup
-                    trigger={<img src="./img/icons/heart.svg" alt="like" />}
+                    trigger={<img role="button" id='heart' tabIndex="0" src="./img/icons/heart.svg" alt="coeur" aria-label="popup" />}
                     position={["bottom center", "bottom right", "bottom left"]}
                     closeOnDocumentClick>
                     <div className='popup'>Vous n'êtes pas encore connecté 🤓</div>
                 </Popup>
             )}
             {uid && liked === false && ( // si "connecté" et pas encore "liker"
-                <img src="./img/icons/heart.svg" onClick={like} alt="like" />
+                <img role="button" id='heart' tabIndex="0" src="./img/icons/heart.svg" onClick={like} alt="coeur" aria-label="popup" />
             )}
             {uid && liked && ( // si "connecté" et déjà "liker"
-                <img src="./img/icons/heart-filled.svg" onClick={unlike} alt="unlike" />
+                <img role="button" id='heart' tabIndex="0" src="./img/icons/heart-filled.svg" onClick={unlike} alt="coeur" aria-label="popup" />
             )}
             {/* le nombre de "like" */}
             <span>{post.likers.length}</span>

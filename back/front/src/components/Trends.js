@@ -40,13 +40,16 @@ const Trends = () => {
 
     return (
         <div className="trending-container">
-            <h4>Posts les plus likés !!!</h4>
+            <div className="trending-like">
+                <h4>Posts les plus likés</h4>
+                <img src="./img/icons/trending.svg" alt="posts populaires" />
+            </div>
             <NavLink to="/trending">
                 <ul>
                     {trendList.length &&
                         trendList.map((post) => { // on affiche la liste des tendnaces
                             return (
-                                <li key={post._id}>
+                                <li tabIndex="0" key={post._id}>
                                     <div>
                                         {/* on affiche la photo du "post" */}
                                         {post.imageUrl && <img src={post.imageUrl} alt="photo du post" />}

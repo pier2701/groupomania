@@ -1,6 +1,6 @@
 $color-1: #ffd7d7;
-$color-2: #ffd0c4;
-$color-3: rgb(0, 22, 44);
+$color-2: #fd2d01;
+$color-3: #393b49b1;
 $color-4: #fdeeeea9;
 $black: #4e5166;
 $white: rgb(253, 253, 253);
@@ -44,34 +44,42 @@ $shadow: rgb(219, 218, 218);
           li {
             cursor: pointer;
             border-radius: 20px;
+            border: lighten($color: #fd2d01, $amount: 15) solid 1px;
             padding: 12px 14px;
-            transition: 0.2s;
+            transition: 0.4s;
             margin: 0 8px;
           }
           .active-btn {
-            background: $black;
+            background: $color-3;
+            &:hover {
+              color: $black;
+              background: $color-1;
+            }
           }
           li:not(.active-btn) {
             &:hover {
-              color: gray;
-              background: whitesmoke;
+              color: $black;
+              background: $color-1;
             }
           }
         }
         form {
           input {
-            background: $color-4;
+            background: $white;
             padding: 10px 14px;
             margin: 0;
             font-size: 1.2rem;
-            border-radius: 20px;
+            border-radius: 15px;
+            border: lighten($color: #fd2d01, $amount: 15) solid 1px;
 
             &:focus {
               box-shadow: 0 0 3px rgba(51, 51, 51, 0.2);
             }
           }
           input[type="submit"] {
+            color: $color-3;
             font-size: smaller;
+            font-weight: bold;
             padding: 14px 14px;
             border-radius: 20px;
           }

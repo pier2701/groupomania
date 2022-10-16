@@ -87,6 +87,7 @@ const NewPostForm = () => {
                     </div>
                     <div className="post-form">
                         <textarea
+                            aria-label="envoyer un post"
                             name="message"
                             id="message"
                             placeholder="Votre post ... 💬"
@@ -116,15 +117,16 @@ const NewPostForm = () => {
                         <div className="footer-form">
                             <div className="icon">
                                 <>
-                                    <img src="./img/icons/picture.svg" alt="icon image" />
+                                    <img src="./img/icons/picture1.svg" alt="icon paysage" />
                                     <input
+                                        aria-label="ajouter une image"
                                         type="file"
                                         id="file-upload"
                                         name="file"
                                         accept=".jpg, .jpeg, .png"
                                         onChange={(e) => handlePicture(e)}
                                     />
-                                </>
+                                </><span className='add-img'>ajouter une image</span>
                             </div>
                             {/* on affiche les "error" s'il y en a */}
                             {!isEmpty(error.format) && <p>{error.format}</p>}

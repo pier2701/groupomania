@@ -66,27 +66,32 @@ const Card = ({ post }) => {
                                 else return null;
                             }).join("") // permet d'enlever les virgules lors du "map" 
                         } alt="photo user" />
+
                     </div>
                     <div className="card-right">
                         <div className="card-header">
                             <div className="pseudo">
                                 <h3>
+                                    {/* on indique la condition pour éviter de s'abonner soi-même */}
+                                    {post.userId !== userData._id && (
+                                        <FollowHandler idToFollow={post.userId} type={"card"} />
+                                    )}
+                                    {/* on affiche le "pseudo" */}
                                     {!isEmpty(usersData[0]) &&
                                         usersData.map((user) => {
                                             if (user._id === post.userId) return user.pseudo;
                                             else return null;
                                         }).join("")}
                                     <br />
-                                    {/* {!isEmpty(usersData[0]) &&
-                                        usersData.map((user) => {
-                                            if (user._id === post.userId) return user.bio;
-                                            else return null;
-                                        }).join("")} */}
+                                    <span>
+                                        {/* on indique le "service" des employés */}
+                                        Service : {!isEmpty(usersData[0]) &&
+                                            usersData.map((user) => {
+                                                if (user._id === post.userId) return user.bio;
+                                                else return null;
+                                            }).join("")}
+                                    </span>
                                 </h3>
-                                {/* on indique la condition pour éviter de s'abonner soi-même */}
-                                {post.userId !== userData._id && (
-                                    <FollowHandler idToFollow={post.userId} type={"card"} />
-                                )}
                             </div>
                             {/* on implémente la date via "dateParser" */}
                             <span>{dateParser(post.createdAt)}</span>
@@ -96,36 +101,23 @@ const Card = ({ post }) => {
                                     usersData.map((user) => {
                                         if (user._id === post.userId) return user.following.length;
                                         else return null;
-                                    }).join("")} abonnements
+                                    }).join("")} Abonnement(s)
                                 <br />
                                 {!isEmpty(usersData[0]) &&
                                     usersData.map((user) => {
                                         if (user._id === post.userId) return user.followers.length;
                                         else return null;
-                                    }).join("")} abonnés
+                                    }).join("")} Abonné(s)
                             </span>
                         </div>
                         {/* s'il n'y a pas de modifications => false && <p> */}
-                        {isUpdated === false && <p>{post.message}</p>}
+                        {isUpdated === false && <h4>{post.message}</h4>}
                         {isUpdated && ( // "isUpdated" => true
                             <div className="update-post">
                                 <textarea
                                     defaultValue={post.message} // message initial
-                                    onChange={(e) => setTextUpdate(e.target.value)} />
-
-                                {/* <div className="icon">
-                                    <>
-                                        <img src="./img/icons/picture.svg" alt="img" />
-                                        <input
-                                            type="file"
-                                            id="file-upload"
-                                            name="file"
-                                            accept=".jpg, .jpeg, .png"
-                                            onChange={(e) => setFile(e.target.files[0])}
-                                        />
-                                    </>
-                                </div> */}
-
+                                    onChange={(e) => setTextUpdate(e.target.value)}
+                                />
                                 <div className="button-container">
                                     <button className='btn' onClick={updateItem}>
                                         Changer le message
@@ -147,7 +139,7 @@ const Card = ({ post }) => {
                         {userData.admin === true && (
                             <div className="button-container">
                                 <div onClick={() => setIsUpdated(!isUpdated)}>
-                                    <img src="./img/icons/edit.svg" alt="edit" />
+                                    <img src="./img/icons/edit.svg" alt="modifier le commentaire" />
                                 </div>
                                 <DeleteCard id={post._id} />
                             </div>
@@ -155,7 +147,7 @@ const Card = ({ post }) => {
                         <div className="card-footer">
                             <div className="comment-icon">
                                 {/* "onClick" aura l'effet d'un "toggle" et inversera l'état de "showComments" */}
-                                <img onClick={() => setShowComments(!showComments)} src="./img/icons/message1.svg" alt="commentaire" />
+                                <img tabIndex="0" onClick={() => setShowComments(!showComments)} src="./img/icons/message.svg" alt="commentaire" />
                                 <span>{post.comments.length}</span>
                             </div>
                             {/* on récupère en "props" les "data" */}

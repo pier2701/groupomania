@@ -56,7 +56,7 @@ export const likePost = (postId, userId) => {
             method: "patch",
             url: "http://localhost:8000/api/post/like/" + postId,
             data: { id: userId },
-            withCredentials: true,
+            //withCredentials: true,
         })
             .then((res) => { // on redistribue le "payload"
                 dispatch({ type: LIKE_POST, payload: { postId, userId } }); // on transmet au "reducer" (redux) 

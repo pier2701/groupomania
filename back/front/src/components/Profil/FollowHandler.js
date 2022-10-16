@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { followUser, unfollowUser } from '../../actions/user.actions';
 import { isEmpty } from '../Utils';
@@ -41,7 +41,12 @@ const FollowHandler = ({ idToFollow, type }) => { // on passe en "props" => "typ
                 <span onClick={handleUnfollow}>
                     {/* on définit l'affichage en fonction de la "props" du component */}
                     {type === "suggestion" && <button className='unfollow-btn'>Abonné</button>}
-                    {type === "card" && <img src='./img/icons/checked.svg' alt='checked' />}
+                    {type === "card" && (
+                        <div className='follow-icon'>
+                            <img tabIndex="0" src='./img/icons/checked1.svg' alt='checked' />
+                            <span className='follow-text'>Ne pas suivre</span>
+                        </div>
+                    )}
                 </span>
             )}
             {isFollowed === false && !isEmpty(userData) && ( // si "false" ("pas Abonné")alors on affiche la <span>
@@ -49,7 +54,12 @@ const FollowHandler = ({ idToFollow, type }) => { // on passe en "props" => "typ
                 <span onClick={handleFollow}>
                     {/* on définit l'affichage en fonction de la "props" du component */}
                     {type === "suggestion" && <button className='follow-btn'>Suivre</button>}
-                    {type === "card" && <img src="./img/icons/check.svg" alt="check" />}
+                    {type === "card" && (
+                        <div className='follow-icon'>
+                            <img tabIndex="0" src="./img/icons/check1.svg" alt="check" />
+                            <span className='follow-text'>Suivre</span>
+                        </div>
+                    )}
                 </span>
             )}
         </>

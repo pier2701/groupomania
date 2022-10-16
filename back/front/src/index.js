@@ -23,7 +23,7 @@ const store = configureStore({
 store.dispatch(getUsers());
 
 // on met à disposition les "post"
-store.dispatch(getPosts);
+store.dispatch(getPosts());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

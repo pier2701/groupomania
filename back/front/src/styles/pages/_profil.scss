@@ -1,8 +1,8 @@
 $color-1: #4e5166;
 $color-2: #ffd7d7;
-$color-3: rgb(0, 22, 44);
+$color-3: #393b49b1;
 $color-4: #6e7189;
-$black: rgb(40, 40, 40);
+$black: #393b49b1;
 $white: rgb(253, 253, 253);
 $shadow: rgb(219, 218, 218);
 
@@ -15,7 +15,80 @@ $shadow: rgb(219, 218, 218);
   height: 55px;
   margin: auto;
 }
+.icon-profil {
+  position: fixed;
+  top: 1px;
+  left: 30px;
+  z-index: 10;
+  h4 {
+    opacity: 0;
+    transition: 0.4s;
+  }
+  @media screen and (max-width: 590px) {
+    top: 5px;
+  }
+  @media screen and (min-width: 1400px) {
+    margin-left: 5%;
+  }
+  @media screen and (min-width: 1700px) {
+    margin-left: 15%;
+  }
+  @media screen and (min-width: 2000px) {
+    margin-left: 18%;
+  }
 
+  a {
+    transition: 0.1s;
+    display: inline-block;
+
+    &:before {
+      transition: 0.15s ease;
+      transform: scale(0);
+      transform-origin: center;
+      z-index: -10;
+      content: "";
+      height: 45px;
+      width: 45px;
+      position: absolute;
+      background: $color-2;
+      color: $color-3;
+      border-radius: 50px;
+      border: #ff7b77 solid 1px;
+    }
+
+    &:hover {
+      transform: scale(1.02);
+    }
+    &:hover::before {
+      transform: scale(1);
+      @media screen and (max-width: 590px) {
+        background: $color-2;
+        height: 34px;
+        width: 34px;
+      }
+    }
+
+    img {
+      @media screen and (max-width: 590px) {
+        height: 34px;
+        width: 34px;
+      }
+    }
+  }
+
+  .active-left-nav:hover {
+    position: relative;
+  }
+}
+.icon-profil:hover {
+  h4 {
+    background: $black;
+    border-radius: 10px;
+    border: #fd2d01 solid 1px;
+    padding: 2px;
+    opacity: 1;
+  }
+}
 .App-logo {
   margin-top: 3%;
   height: 80px;
@@ -81,16 +154,16 @@ $shadow: rgb(219, 218, 218);
     }
   }
   .connection-form {
-    border: 1px solid #fff;
+    border: 1px solid $color-2;
     color: #fff;
-    background: #a6a3a3;
+    background: #5e627d;
     min-width: 490px;
     width: 90%;
     text-align: center;
     margin: 0 auto;
     padding: 20px;
     border-radius: 50px 50px 0 0;
-    transition: 2s;
+    transition: 0.4s;
 
     @media screen and (max-width: 550px) {
       min-width: 200px;
@@ -107,26 +180,28 @@ $shadow: rgb(219, 218, 218);
       ul {
         li {
           cursor: pointer;
-          border-radius: 50px;
-          padding: 10px 20px;
-          transition: 1s;
+          border-radius: 20px;
+          border: lighten($color: #fd2d01, $amount: 15) solid 1px;
+          padding: 12px 14px;
+          transition: 0.4s;
+          margin: 10px auto;
 
           @media screen and (max-width: 550px) {
             width: 80%;
-            margin: 0 auto;
+            margin: 15px auto;
           }
         }
         .active-btn {
-          background: #b6897f;
-
+          background: $color-3;
           &:hover {
+            color: #4e5166;
             background: $color-2;
           }
         }
         li:not(.active-btn) {
           &:hover {
-            font-size: 17px;
-            transform: translate(-1px, -1px);
+            color: $color-1;
+            background: $color-2;
           }
         }
         #login {
@@ -150,11 +225,14 @@ $shadow: rgb(219, 218, 218);
       form {
         input {
           width: 100%;
-          color: whitesmoke;
+          background: $white;
+          color: $black;
           padding: 14px 20px;
           margin: auto;
           font-size: 1.2rem;
+          font-weight: bold;
           border-radius: 50px;
+          border: lighten($color: #fd2d01, $amount: 15) solid 1px;
 
           &:focus {
             box-shadow: 0 0 3px rgba(51, 51, 51, 0.2);
@@ -235,7 +313,7 @@ $shadow: rgb(219, 218, 218);
           transform: translate(-50%, -50%);
           width: 270px;
           background: $color-1;
-          color: $color-2;
+          color: white;
           border-radius: 50px;
           box-shadow: 15px 11px 6px rgba(51, 51, 51, 0.363);
           display: inline-block;
@@ -262,6 +340,8 @@ $shadow: rgb(219, 218, 218);
           }
         }
         input[type="submit"] {
+          background: $white;
+          color: black;
           font-weight: bold;
           border: #fd2d01 1px solid;
           margin-top: 10px;
@@ -270,7 +350,7 @@ $shadow: rgb(219, 218, 218);
 
           &:hover {
             font-weight: bold;
-            color: $color-1;
+            color: #fd2d01;
             transition: 0.5s;
             letter-spacing: 1px;
           }
@@ -291,7 +371,7 @@ $shadow: rgb(219, 218, 218);
       }
       p,
       textarea {
-        color: whitesmoke;
+        color: white;
         min-height: 80px;
         border: 1px solid $color-1;
         border-radius: 20px 20px 5px 20px;
@@ -307,6 +387,8 @@ $shadow: rgb(219, 218, 218);
         box-shadow: 15px 11px 6px rgba(51, 51, 51, 0.363);
       }
       button {
+        background: $white;
+        color: black;
         width: 55%;
         font-weight: bold;
         border: #fd2d01 1px solid;
@@ -315,16 +397,17 @@ $shadow: rgb(219, 218, 218);
         box-shadow: 15px 11px 6px rgba(51, 51, 51, 0.363);
         &:hover {
           font-weight: bold;
-          color: $color-1;
+          color: #fd2d01;
           transition: 0.5s;
         }
       }
       h4 {
         margin: 60px 0 10px;
+        color: white;
       }
       h5 {
         background: $color-1;
-        color: $color-2;
+        color: white;
         margin: 20px 0;
         padding: 12px;
         font-size: 1.1rem;

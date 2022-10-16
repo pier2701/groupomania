@@ -81,23 +81,56 @@ $shadow: #eba8a8;
         }
 
         span {
+          font-size: smaller;
+          font-style: normal;
+          font-weight: bolder;
+          color: $color-2;
           transform: translate(0px, -5px);
 
           @media screen and (max-width: 440px) {
             margin: 0px 0 -10px;
             padding: 0;
           }
-
+          .follow-text {
+            margin-left: 5px;
+            position: absolute;
+            top: -3px;
+            left: 0px;
+            opacity: 0;
+            transition: 0.3s;
+            transform: translateY(20px);
+            @media screen and (max-width: 590px) {
+              top: 8px;
+              left: 5px;
+            }
+            @media screen and (max-width: 440px) {
+              top: -20px;
+              left: -80px;
+              margin-left: -70px;
+            }
+          }
+          .follow-icon {
+            width: 20px;
+            &:hover {
+              .follow-text {
+                opacity: 1;
+                left: 115px;
+              }
+            }
+          }
           img {
-            padding: 5px;
             cursor: pointer;
-            transition: 0.15s;
+            transition: 0.2s;
             box-shadow: none;
-            height: 28px;
-            width: 28px;
+            height: 20px;
+            width: 20px;
+            margin-left: 10px;
 
             &:hover {
               transform: scale(1.2) translate(0px, 0px);
+              background: #2b2d39;
+              border: 1px solid $color-2;
+              border-radius: 50px;
             }
           }
 
@@ -116,7 +149,6 @@ $shadow: #eba8a8;
         img {
           height: 15px;
           width: 15px;
-          //border-radius: 50px;
           object-fit: cover;
 
           @media screen and (max-width: 440px) {
@@ -157,10 +189,12 @@ $shadow: #eba8a8;
       }
       .button-container {
         .btn {
+          color: black;
           background: $color-2;
           width: 200px;
 
           &:hover {
+            color: $color-1;
             width: 210px;
             letter-spacing: 0.1px;
           }
@@ -269,7 +303,7 @@ $shadow: #eba8a8;
         display: flex;
         justify-content: space-between;
 
-        @media screen and (max-width: 440px) {
+        @media screen and (max-width: 510px) {
           flex-direction: column;
         }
 
@@ -282,6 +316,25 @@ $shadow: #eba8a8;
               box-shadow: none;
               height: 15px;
               width: 15px;
+            }
+            .follow-text {
+              width: 120px;
+              font-style: normal;
+              color: $color-2;
+              position: absolute;
+              left: -120px;
+              transition: 0.3s;
+              opacity: 0;
+            }
+            .follow-icon:hover {
+              img {
+                border-radius: 50px;
+                border: #ffd7d7 solid 1px;
+              }
+              .follow-text {
+                left: 10px;
+                opacity: 1;
+              }
             }
           }
         }
@@ -302,7 +355,6 @@ $shadow: #eba8a8;
           margin-left: 10px;
           cursor: pointer;
           transition: 0.3s;
-          box-shadow: none;
           height: 30px;
           width: 30px;
           padding: 3px;
@@ -319,16 +371,15 @@ $shadow: #eba8a8;
           label {
             background: $white;
             border: $color-1 solid 1px;
-            color: $color-1;
+            color: black;
             padding: 5px 15px 5px;
             border-radius: 20px 20px 20px 20px;
             cursor: pointer;
             transition: 0.4s;
             display: inline-block;
-
-            // &:hover {
-            //   transform: scale(1.05);
-            // }
+            &:hover {
+              color: $color-1;
+            }
           }
           input[type="text"] {
             margin: 4px 0;
@@ -363,9 +414,13 @@ $shadow: #eba8a8;
             input[type="submit"] {
               display: flex;
               background: $color-2;
+              color: black;
               width: inherit;
               height: 35px;
               transition: 0.2s;
+              &:hover {
+                color: $color-1;
+              }
             }
           }
         }
@@ -394,6 +449,7 @@ $shadow: #eba8a8;
         padding: 7px 16px;
         width: 120px;
         background: $color-2;
+        color: black;
         border-radius: 0px 0 20px 20px;
         transition: 0.2s;
         float: right;

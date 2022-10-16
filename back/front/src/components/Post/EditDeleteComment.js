@@ -56,17 +56,17 @@ const EditDeleteComment = ({ comment, postId }) => {
             {isAuthor && edit === false && userData.admin === false && ( // au click on affichera le champ "edit"
                 // on affichera l'édition de texte sous ces 2 conditions
                 <span onClick={() => setEdit(!edit)}>
-                    <img src="./img/icons/edit.svg" alt="edit-comment" />
+                    <img tabIndex="0" src="./img/icons/edit.svg" alt="modifier le commentaire" />
                 </span>
             )}
             {userData.admin === true && edit === false && (
                 <span onClick={() => setEdit(!edit)}>
-                    <img src="./img/icons/edit.svg" alt="edit-comment" />
+                    <img tabIndex="0" src="./img/icons/edit.svg" alt="modifier le commentaire" />
                 </span>
             )}
             {isAuthor && edit && userData.admin === false && ( // si "edit" = true, au "click" on affichera l'icône 
                 <form action="" onSubmit={handleEdit} className="edit-comment-form">
-                    <label htmlFor="text" onClick={() => setEdit(!edit)}>
+                    <label tabIndex="1" htmlFor="text" onClick={() => setEdit(!edit)}>
                         modifier le texte
                     </label>
                     <br />
@@ -87,7 +87,7 @@ const EditDeleteComment = ({ comment, postId }) => {
                                 }
                             }}
                         >
-                            <img src="./img/icons/trash.svg" alt="delete" />
+                            <img tabIndex="1" src="./img/icons/trash.svg" alt="supprimer" />
                         </span></div>
                     <input type="submit" value="confirmer" />
 
@@ -95,7 +95,7 @@ const EditDeleteComment = ({ comment, postId }) => {
             )}
             {userData.admin === true && edit && (
                 <form action="" onSubmit={handleEdit} className="edit-comment-form">
-                    <label htmlFor="text" onClick={() => setEdit(!edit)}>
+                    <label tabIndex="1" htmlFor="text" onClick={() => setEdit(!edit)}>
                         modifier le texte
                     </label>
                     <br />
@@ -114,7 +114,7 @@ const EditDeleteComment = ({ comment, postId }) => {
                                 }
                             }}
                         >
-                            <img src="./img/icons/trash.svg" alt="delete" />
+                            <img src="./img/icons/trash.svg" alt="supprimer" />
                         </span>
                         <input type="submit" value="modifier" />
                     </div>

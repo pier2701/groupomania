@@ -147,13 +147,13 @@ exports.deletePost = (req, res) => {
 }
 
 // méthode pour "like" un "post"
-exports.likePost = async (req, res) => {
+exports.likePost = (req, res) => {
     // on vérifie si le "post" existe
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).send("Post inconnu : " + req.params.id);
 
     // on récupère le "post"
-    await Post.findByIdAndUpdate(
+    Post.findByIdAndUpdate(
         req.params.id,
         // on incrémente [likers] du "Post"
         {
@@ -181,13 +181,13 @@ exports.likePost = async (req, res) => {
 }
 
 // méthode pour "unlike" un "post"
-exports.unlikePost = async (req, res) => {
+exports.unlikePost = (req, res) => {
     // on vérifie si le "post" existe
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).send("Post inconnu : " + req.params.id);
 
     // on récupère le "post"
-    await Post.findByIdAndUpdate(
+    Post.findByIdAndUpdate(
         req.params.id,
         // on décrémente [likes] du "User"
         {

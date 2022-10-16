@@ -56,7 +56,7 @@ exports.deleteUser = async (req, res) => {
 
 
 // on créé la logique pour la gestion des [follow]
-exports.follow = async (req, res) => {
+exports.follow = (req, res) => {
     UserModel.findByIdAndUpdate(req.body.idToFollow,
         { $addToSet: { followers: req.params.id } },
         { new: true },
@@ -77,7 +77,7 @@ exports.follow = async (req, res) => {
 
 
 // on créé la logique pour la gestion des [unfollow]
-exports.unfollow = async (req, res) => {
+exports.unfollow = (req, res) => {
     //on décrémente le [] des [followers]
     UserModel.findByIdAndUpdate(req.body.idToUnfollow, {
         $pull: { followers: req.params.id }

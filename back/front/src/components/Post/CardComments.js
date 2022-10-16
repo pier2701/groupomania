@@ -68,6 +68,7 @@ const CardComments = ({ post }) => {
             {userData._id && ( // le "user" doit être connecté
                 <form action="" onSubmit={handleComment} className="comment-form">
                     <input
+                        aria-label="ajouter un message"
                         type="text"
                         name="text"
                         onChange={(e) => setText(e.target.value)} // on stockera dans les "states"

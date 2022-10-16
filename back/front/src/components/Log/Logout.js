@@ -25,9 +25,12 @@ const Logout = () => {
     }
 
     return (
-        <li onClick={logout}>
-            <img className='icon_log' src="./img/icons/log_out.svg" alt="logout" />
-        </li>
+        <div className='log-hover'>
+            <li onClick={logout}>
+                <img tabIndex="0" className='icon_log' src="./img/icons/log_out.svg" alt="logout" />
+            </li>
+            <div className='login-icon'>Se déconnecter</div>
+        </div>
     );
 };
 

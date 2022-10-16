@@ -7,15 +7,19 @@ const LeftNav = () => {
             <div className='icons'>
                 <div className='icons-bis'>
                     <NavLink to='/' className='active-left-nav'>
-                        <img src="./img/icons/home.svg" alt="home" />
+                        <img tabIndex="0" src="./img/icons/new-home.svg" alt="accueil" />
+                        <p>Posts</p>
                     </NavLink>
+
                     <br />
                     <NavLink to='/trending' className='active-left-nav'>
-                        <img src="./img/icons/rocket.svg" alt="home" />
+                        <img tabIndex="0" src="./img/icons/trending.svg" alt="posts populaires" />
+                        <p>Likés</p>
                     </NavLink>
                     <br />
                     <NavLink to='/profil' className='active-left-nav'>
-                        <img src="./img/icons/user.svg" alt="home" />
+                        <img tabIndex="0" src="./img/icons/user-info.svg" alt="infos utilisateur" />
+                        <p>Infos</p>
                     </NavLink>
                 </div>
             </div>

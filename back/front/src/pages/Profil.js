@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import Log from '../components/Log';
 import { UidContext } from '../components/AppContext';
 import UpdateProfil from '../components/Profil/UpdateProfil';
@@ -15,6 +16,12 @@ const Profil = () => {
                 <UpdateProfil />
             ) : (
                 <div className="log-container">
+                    <div className="icon-profil">
+                        <NavLink to='/' className='active-left-nav'>
+                            <img tabIndex="0" src="./img/icons/new-home.svg" alt="accueil" />
+                        </NavLink>
+                        <h4>Posts</h4>
+                    </div>
                     {/* on intègre nos "props" */}
                     <Log signin={false} signup={true} />
                 </div>

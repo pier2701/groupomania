@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import SignUpForm from './SignUpForm';
 import SignInForm from './SignInForm';
 
@@ -20,27 +21,22 @@ const Log = (props) => {
 
     return (
         <Fragment>
-            {/* <div>
-                {/* cette image vient du dossier public */}
-            {/* <img src="./img/logo.png" className="App-logo" alt="logo" />
-
-                <img src="./img/logoName.png" className="App-name" alt="logo_name" /></div>
-             
-            */}
             <div className="connection-form">
                 <div className='display-logo'>
-                    <img src="./img/logo.png" className="App-logo" alt="logo" />
-                    <img src="./img/logoName.png" className="App-name" alt="logo_name" />
+                    <img src="./img/logo.png" className="App-logo" alt="icone de l'application" />
+                    <img src="./img/logoName.png" className="App-name" alt="nom de l'application" />
                 </div>
                 <div className="form-container">
                     <ul>
                         <li
+                            tabIndex="0"
                             id='register'
                             onClick={handleModals}
                             className={singUpModal ? "active-btn" : null}>
                             S'inscrire
                         </li>
                         <li
+                            tabIndex="0"
                             id='login'
                             onClick={handleModals}
                             className={singInModal ? "active-btn" : null}>

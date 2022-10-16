@@ -14,11 +14,8 @@ const Navbar = () => {
     return (
         <nav>
             <div className="nav-container">
-
                 <div className="logo">
-                    <NavLink to="/">
-                        <img src="./img/logo-black.svg" alt="logo du site" />
-                    </NavLink>
+                    <h1><img src="./img/logo-black.svg" alt="logo du site" /></h1>
                 </div>
                 {uid ? ( // si le "user" est coonnecté
                     <ul>
@@ -26,8 +23,8 @@ const Navbar = () => {
                         <li className='welcome'>
                             <NavLink to="/profil">
                                 {/* on passe la "data" */}
-                                {(userData.admin === true) && <h5>Admin</h5>}
-                                {(userData.admin === false) && <h5>{userData.pseudo} 👤</h5>}
+                                {(userData.admin === true) && <h2 tabIndex="0">Admin</h2>}
+                                {(userData.admin === false) && <h2 tabIndex="0">{userData.pseudo} 👤</h2>}
                             </NavLink>
                         </li>
                         <Logout />
@@ -36,9 +33,12 @@ const Navbar = () => {
                     <ul>
                         <li></li>
                         <li>
-                            <NavLink to="/profil">
-                                <img className='icon_log' src="./img/icons/log_in.svg" alt="login" />
-                            </NavLink>
+                            <div className='log-hover'>
+                                <NavLink to="/profil">
+                                    <img tabIndex="0" className='icon_log' src="./img/icons/log_in.svg" alt="s'enregistrer" />
+                                </NavLink>
+                                <div className='login-icon'>Se connecter</div>
+                            </div>
                         </li>
                     </ul>
                 )}

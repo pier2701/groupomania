@@ -1,11 +1,13 @@
-$color-1: #ff7b77;
-$color-2: #ffd0c4;
-$color-3: rgb(0, 22, 44);
+$color-1: #ffd7d7;
+$color-2: #fd2d01;
+$color-3: #4e5166;
 $color-4: #fdeeee;
-$black: rgb(40, 40, 40);
+$black: #393b49b1;
 $white: rgb(253, 253, 253);
-$shadow: rgb(219, 218, 218);
+$back: #5e627d;
 .connection-from {
+  background: $back;
+  max-width: 1200px;
   border: 2px solid $color-1;
   width: 400px;
   margin: 35px auto 0;
@@ -27,6 +29,7 @@ $shadow: rgb(219, 218, 218);
       color: $white;
       width: 130px;
       padding: 10px 0;
+      margin-top: 5px;
       border-radius: 18px;
       cursor: pointer;
       transition: 0.3s;
