@@ -22,10 +22,9 @@ const { json } = require("express");
 const { error } = require("console");
 const { send } = require("process");
 const { request } = require("http");
-//const { isEmpty } = require("../front/src/components/Utils");
 
-
-// on exporte les méthodes "Post"
+const jwt = require('jsonwebtoken');
+require('dotenv').config({ path: './config/.env' });
 
 // méthode pour créer un "post"
 exports.createPost = async (req, res) => {
@@ -99,8 +98,7 @@ exports.getOnePost = (req, res) => {
 };
 
 // méthode pour modifier un "post"
-exports.updatePost = (req, res) => {
-    //console.log(req.params.id)
+exports.updatePost = async (req, res) => {
     // on vérifie si le "post" existe
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).send("Post inconnu : " + req.params.id);
@@ -109,16 +107,43 @@ exports.updatePost = (req, res) => {
         message: req.body.message,
     };
 
-    Post.findByIdAndUpdate(
-        req.params.id,
-        { $set: modifyPost },
-        { new: true },
-        (err, docs) => {
-            if (!err) res.send(docs);
-            else console.log("Update error : " + err);
-        }
-    );
-
+    // on récupère le "token" via "cookie-parser"
+    const token = req.cookies.jwt;
+    if (token) {
+        jwt.verify(token, process.env.SECRET_KEY, async (error, clearToken) => {
+            if (error) {
+                console.log(error);
+                res.send(200).json('Connection non-autorisée : ' + error)
+            } else {
+                let reqUserId = clearToken.id;
+                console.log('reqUserId = ' + reqUserId);
+                await Post.findOne({ _id: req.params.id })
+                    .then((post) => {
+                        console.log(" => userId du post = " + post.userId);
+                        console.log(" => userId de la req = " + reqUserId);
+                        if (post.userId != reqUserId) {
+                            // si Id est != de l'id du token => erreur 403 "unauthorized request"
+                            console.log("differents userId !!!");
+                            res.status(403).json({ message: "unauthorized request" });
+                        } else {
+                            Post.findByIdAndUpdate(
+                                req.params.id,
+                                { $set: modifyPost },
+                                { new: true },
+                                (err, docs) => {
+                                    if (!err) res.send(docs);
+                                    else console.log("Update error : " + err);
+                                }
+                            );
+                            console.log("post modifié");
+                        }
+                    })
+                    .catch((error) => res.status(400).json({ error })); // si le post ne lui appartient pas
+            };
+        })
+    } else {
+        console.log('Connection non-autorisée');
+    }
 };
 // méthode pour supprimer un "post"
 exports.deletePost = (req, res) => {
@@ -126,24 +151,52 @@ exports.deletePost = (req, res) => {
     if (!ObjectId.isValid(req.params.id)) {
         return res.status(400).send("Post inconnu : " + req.params.id);
     }
-    Post.findByIdAndRemove(
-        req.params.id,
-        (error, data) => {
-            if (!error) {
-                res.send(data);
-                if (data.imageUrl) {
-                    const imageUrl = data.imageUrl.split("/uploads/")[1];
-                    fs.unlink("front/public/uploads/" + imageUrl, (err) => {
-                        if (err) throw err;
-                        console.log('image supprimée');
-                    });
-                } else {
-                    console.log("post sans image");
-                }
 
-            }
-            else console.log("erreur dans 'delete' : " + error);
-        });
+    // on récupère le "token" via "cookie-parser"
+    const token = req.cookies.jwt;
+    if (token) {
+        jwt.verify(token, process.env.SECRET_KEY, async (error, clearToken) => {
+            if (error) {
+                console.log(error);
+                res.send(200).json('Connection non-autorisée : ' + error)
+            } else {
+                let reqUserId = clearToken.id;
+                console.log('reqUserId = ' + reqUserId);
+                await Post.findOne({ _id: req.params.id })
+                    .then((post) => {
+                        console.log(" => userId du post = " + post.userId);
+                        console.log(" => userId de la req = " + reqUserId);
+                        if (post.userId != reqUserId) {
+                            // si Id est != de l'id du token => erreur 403 "unauthorized request"
+                            console.log("differents userId !!!");
+                            res.status(403).json({ message: "unauthorized request" });
+                        } else {
+                            Post.findByIdAndRemove(
+                                req.params.id,
+                                (error, data) => {
+                                    if (!error) {
+                                        res.send(data);
+                                        if (data.imageUrl) {
+                                            const imageUrl = data.imageUrl.split("/uploads/")[1];
+                                            fs.unlink("front/public/uploads/" + imageUrl, (err) => {
+                                                if (err) throw err;
+                                                console.log('image supprimée');
+                                            });
+                                        } else {
+                                            console.log("post sans image");
+                                        }
+                                    }
+                                    else console.log("erreur dans 'delete' : " + error);
+                                });
+                            console.log("post supprimé");
+                        }
+                    })
+                    .catch((error) => res.status(400).json({ error })); // si le post ne lui appartient pas
+            };
+        })
+    } else {
+        console.log('Connection non-autorisée');
+    }
 }
 
 // méthode pour "like" un "post"

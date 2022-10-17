@@ -116,7 +116,7 @@ const Card = ({ post }) => {
                             <div className="update-post">
                                 <textarea
                                     defaultValue={post.message} // message initial
-                                    onChange={(e) => setTextUpdate(e.target.value)}
+                                    onChange={(e) => setTextUpdate(e.target.value + " ( modifié )")} // on indique en front la modification
                                 />
                                 <div className="button-container">
                                     <button className='btn' onClick={updateItem}>

@@ -10,6 +10,7 @@ const upload = multer();
 
 // importation des "post" créé le dossier "controllers"
 const postCtrl = require("../controllers/post.controller");
+const { requireAuth } = require('../middleware/auth.middleware');
 
 // on implémente les chemin du rôle "admin"
 const isAdmin = require("../middleware/isAdmin");
@@ -24,7 +25,7 @@ router.get("/:id", postCtrl.getOnePost);
 router.post("/", upload.single("file"), postCtrl.createPost);
 
 // route de type PUT request pour modifier un article
-router.put("/:id", isAdmin, postCtrl.updatePost);
+router.put("/:id", isAdmin, requireAuth, postCtrl.updatePost);
 
 // route de type DELETE request pour supprimer un article
 router.delete("/:id", isAdmin, postCtrl.deletePost);
