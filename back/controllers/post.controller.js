@@ -107,43 +107,16 @@ exports.updatePost = async (req, res) => {
         message: req.body.message,
     };
 
-    // on récupère le "token" via "cookie-parser"
-    const token = req.cookies.jwt;
-    if (token) {
-        jwt.verify(token, process.env.SECRET_KEY, async (error, clearToken) => {
-            if (error) {
-                console.log(error);
-                res.send(200).json('Connection non-autorisée : ' + error)
-            } else {
-                let reqUserId = clearToken.id;
-                console.log('reqUserId = ' + reqUserId);
-                await Post.findOne({ _id: req.params.id })
-                    .then((post) => {
-                        console.log(" => userId du post = " + post.userId);
-                        console.log(" => userId de la req = " + reqUserId);
-                        if (post.userId != reqUserId) {
-                            // si Id est != de l'id du token => erreur 403 "unauthorized request"
-                            console.log("differents userId !!!");
-                            res.status(403).json({ message: "unauthorized request" });
-                        } else {
-                            Post.findByIdAndUpdate(
-                                req.params.id,
-                                { $set: modifyPost },
-                                { new: true },
-                                (err, docs) => {
-                                    if (!err) res.send(docs);
-                                    else console.log("Update error : " + err);
-                                }
-                            );
-                            console.log("post modifié");
-                        }
-                    })
-                    .catch((error) => res.status(400).json({ error })); // si le post ne lui appartient pas
-            };
-        })
-    } else {
-        console.log('Connection non-autorisée');
-    }
+    Post.findByIdAndUpdate(
+        req.params.id,
+        { $set: modifyPost },
+        { new: true },
+        (err, docs) => {
+            if (!err) res.send(docs);
+            else console.log("Update error : " + err);
+        }
+    );
+    console.log("post modifié");
 };
 // méthode pour supprimer un "post"
 exports.deletePost = (req, res) => {
@@ -152,51 +125,24 @@ exports.deletePost = (req, res) => {
         return res.status(400).send("Post inconnu : " + req.params.id);
     }
 
-    // on récupère le "token" via "cookie-parser"
-    const token = req.cookies.jwt;
-    if (token) {
-        jwt.verify(token, process.env.SECRET_KEY, async (error, clearToken) => {
-            if (error) {
-                console.log(error);
-                res.send(200).json('Connection non-autorisée : ' + error)
-            } else {
-                let reqUserId = clearToken.id;
-                console.log('reqUserId = ' + reqUserId);
-                await Post.findOne({ _id: req.params.id })
-                    .then((post) => {
-                        console.log(" => userId du post = " + post.userId);
-                        console.log(" => userId de la req = " + reqUserId);
-                        if (post.userId != reqUserId) {
-                            // si Id est != de l'id du token => erreur 403 "unauthorized request"
-                            console.log("differents userId !!!");
-                            res.status(403).json({ message: "unauthorized request" });
-                        } else {
-                            Post.findByIdAndRemove(
-                                req.params.id,
-                                (error, data) => {
-                                    if (!error) {
-                                        res.send(data);
-                                        if (data.imageUrl) {
-                                            const imageUrl = data.imageUrl.split("/uploads/")[1];
-                                            fs.unlink("front/public/uploads/" + imageUrl, (err) => {
-                                                if (err) throw err;
-                                                console.log('image supprimée');
-                                            });
-                                        } else {
-                                            console.log("post sans image");
-                                        }
-                                    }
-                                    else console.log("erreur dans 'delete' : " + error);
-                                });
-                            console.log("post supprimé");
-                        }
-                    })
-                    .catch((error) => res.status(400).json({ error })); // si le post ne lui appartient pas
-            };
-        })
-    } else {
-        console.log('Connection non-autorisée');
-    }
+    Post.findByIdAndRemove(
+        req.params.id,
+        (error, data) => {
+            if (!error) {
+                res.send(data);
+                if (data.imageUrl) {
+                    const imageUrl = data.imageUrl.split("/uploads/")[1];
+                    fs.unlink("front/public/uploads/" + imageUrl, (err) => {
+                        if (err) throw err;
+                        console.log('image supprimée');
+                    });
+                } else {
+                    console.log("post sans image");
+                }
+            }
+            else console.log("erreur dans 'delete' : " + error);
+        });
+    console.log("post supprimé");
 }
 
 // méthode pour "like" un "post"
