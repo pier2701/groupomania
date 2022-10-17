@@ -24,10 +24,10 @@ router.get("/:id", postCtrl.getOnePost);
 router.post("/", upload.single("file"), postCtrl.createPost);
 
 // route de type PUT request pour modifier un article
-router.put("/:id", isAdmin, postCtrl.updatePost);
+router.put("/:id", postCtrl.updatePost);
 
 // route de type DELETE request pour supprimer un article
-router.delete("/:id", isAdmin, postCtrl.deletePost);
+router.delete("/:id", postCtrl.deletePost);
 
 // les routes vers laquelle nous intercepterons les requêtes de type PATCH des "like/unlike"
 router.patch('/like/:id', postCtrl.likePost);
