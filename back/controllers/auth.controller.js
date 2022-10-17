@@ -5,13 +5,13 @@ const jwt = require('jsonwebtoken');
 // on récupère la gestion des "errors"
 const { signUpErrors, signInErrors } = require('../utils/errors');
 
-const maxAge = 3 * 60 * 60 * 1000; // expire au bout de 3h.
+const MAX_AGE = 3 * 60 * 60 * 1000; // expire au bout de 3h.
 require('dotenv').config({ path: './config/.env' });
 
 // paramètre du "token"
 const createToken = (id) => {
     return jwt.sign({ id }, process.env.SECRET_KEY, {
-        expiresIn: maxAge
+        expiresIn: MAX_AGE
     })
 };
 
@@ -40,7 +40,7 @@ exports.signIn = async (req, res) => {
         const user = await UserModel.login(email, password);
         const token = createToken(user._id);
         // on met le "token" dans un cookie
-        res.cookie('jwt', token, { httpOnly: true, maxAge });
+        res.cookie('jwt', token, { httpOnly: true, MAX_AGE });
         res.status(200).json({ user: user._id })
     } catch (error) {
         console.log(error);
@@ -53,6 +53,6 @@ exports.signIn = async (req, res) => {
 // la logique pour se déconnecter
 exports.logout = (req, res) => {
     // on génère un cookie vide
-    res.cookie('jwt', '', { maxAge: 1 });
+    res.cookie('jwt', '', { MAX_AGE: 1 });
     res.redirect('/');
 }

@@ -34,11 +34,6 @@ const Card = ({ post }) => {
 
     // on implémente la fonction pour mettre à jour le "text"
     const updateItem = () => {
-        // const data = new FormData();
-        // // data.append("name", userData.pseudo);
-        // // data.append("userId", userData._id);
-        // data.append('message', message);
-        // data.append("file", file);
         if (textUpdate) { // s'il y a du contenu à modifier
             dispatch(updatePost(post._id, textUpdate)) // mise à jour du "text" via le userId du post
         }

@@ -11,9 +11,6 @@ const upload = multer();
 // importation des "post" créé le dossier "controllers"
 const postCtrl = require("../controllers/post.controller");
 
-// on implémente les chemin du rôle "admin"
-const isAdmin = require("../middleware/isAdmin");
-
 // la route vers laquelle nous intercepterons les requêtes de type GET de toutes les posts
 router.get("/", postCtrl.readAllPosts);
 

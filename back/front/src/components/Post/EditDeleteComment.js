@@ -74,7 +74,7 @@ const EditDeleteComment = ({ comment, postId }) => {
                         type="text"
                         name="text"
                         // on récupère la "data" pour mettre à jour notre database
-                        onChange={(e) => setText(e.target.value)}
+                        onChange={(e) => setText(e.target.value + " ( modifié )")}
                         // on modifie le texte en cours
                         defaultValue={comment.text}
                     />
@@ -102,7 +102,7 @@ const EditDeleteComment = ({ comment, postId }) => {
                     <input
                         type="text"
                         name="text"
-                        onChange={(e) => setText(e.target.value)}
+                        onChange={(e) => setText(e.target.value + " ( modifié )")}
                         defaultValue={comment.text}
                     />
                     <br />
