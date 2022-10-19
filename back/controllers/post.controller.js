@@ -103,10 +103,14 @@ exports.updatePost = async (req, res) => {
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).send("Post inconnu : " + req.params.id);
 
+    // on déclare le nom de notre "image"
+    //let fileName = req.body.userId + Date.now() + ".jpg";
+
     const modifyPost = {
         message: req.body.message,
+        //imageUrl: req.file !== null ? "./uploads/posts/" + fileName : "",
     };
-
+    console.log(modifyPost);
     // on récupère le "user" du Post via le "token"
     const token = req.cookies.jwt;
     if (token) {
