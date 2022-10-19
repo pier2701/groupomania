@@ -107,16 +107,49 @@ exports.updatePost = async (req, res) => {
         message: req.body.message,
     };
 
-    Post.findByIdAndUpdate(
-        req.params.id,
-        { $set: modifyPost },
-        { new: true },
-        (err, docs) => {
-            if (!err) res.send(docs);
-            else console.log("Update error : " + err);
-        }
-    );
-    console.log("post modifié");
+    // on récupère le "user" du Post via le "token"
+    const token = req.cookies.jwt;
+    if (token) {
+        jwt.verify(token, process.env.SECRET_KEY, async (error, clearToken) => {
+            if (error) {
+                console.log(error);
+                res.send(200).json('Connection non-autorisée : ' + error)
+            } else {
+                console.log("le userId de la req : " + clearToken.id);
+                Post.findOne({ _id: req.params.id })
+                    .then((post) => {
+                        User.findOne({ _id: clearToken.id })
+                            .then((user) => {
+                                //console.log(user)
+                                if (clearToken.id === post.userId || user.admin === true) {
+                                    console.log("User identifié")
+                                    Post.findByIdAndUpdate(
+                                        req.params.id,
+                                        { $set: modifyPost },
+                                        { new: true },
+                                        (err, docs) => {
+                                            if (!err) res.send(docs);
+                                            else console.log("Update error : " + err);
+                                        }
+                                    );
+                                    console.log("post modifié");
+                                } else {
+                                    console.log('Modification non-autorisée');
+                                }
+                            })
+                            .catch((error) => {
+                                console.log(error)
+                            })
+
+                    }
+                    )
+                    // error 401 pour dire que le "post" n'est pas trouvé
+                    .catch((error) => res.status(401).send("erreur dans 'getOne' : " + error));
+            }
+        });
+    } else {
+        console.log('Connection non-autorisée');
+    }
 };
 // méthode pour supprimer un "post"
 exports.deletePost = (req, res) => {
@@ -125,25 +158,79 @@ exports.deletePost = (req, res) => {
         return res.status(400).send("Post inconnu : " + req.params.id);
     }
 
-    Post.findByIdAndRemove(
-        req.params.id,
-        (error, data) => {
-            if (!error) {
-                res.send(data);
-                if (data.imageUrl) {
-                    const imageUrl = data.imageUrl.split("/uploads/")[1];
-                    fs.unlink("front/public/uploads/" + imageUrl, (err) => {
-                        if (err) throw err;
-                        console.log('image supprimée');
-                    });
-                } else {
-                    console.log("post sans image");
-                }
+    // on récupère le "user" du Post via le "token"
+    const token = req.cookies.jwt;
+    if (token) {
+        jwt.verify(token, process.env.SECRET_KEY, async (error, clearToken) => {
+            if (error) {
+                console.log(error);
+                res.send(200).json('Connection non-autorisée : ' + error)
+            } else {
+                console.log("le userId de la req : " + clearToken.id);
+                Post.findOne({ _id: req.params.id })
+                    .then((post) => {
+                        User.findOne({ _id: clearToken.id })
+                            .then((user) => {
+                                //console.log(user)
+                                if (clearToken.id === post.userId || user.admin === true) {
+                                    console.log("User identifié")
+                                    Post.findByIdAndRemove(
+                                        req.params.id,
+                                        (error, data) => {
+                                            if (!error) {
+                                                res.send(data);
+                                                if (data.imageUrl) {
+                                                    const imageUrl = data.imageUrl.split("/uploads/")[1];
+                                                    fs.unlink("front/public/uploads/" + imageUrl, (err) => {
+                                                        if (err) throw err;
+                                                        console.log('image supprimée');
+                                                    });
+                                                } else {
+                                                    console.log("post sans image");
+                                                }
+                                            }
+                                            else console.log("erreur dans 'delete' : " + error);
+                                        });
+                                    console.log("post supprimé");
+
+                                } else {
+                                    console.log('Suppression non-autorisée');
+                                }
+                            })
+                            .catch((error) => {
+                                console.log(error)
+                            })
+
+                    }
+                    )
+                    // error 401 pour dire que le "post" n'est pas trouvé
+                    .catch((error) => res.status(401).send("erreur dans 'getOne' : " + error));
             }
-            else console.log("erreur dans 'delete' : " + error);
         });
-    console.log("post supprimé");
-}
+    } else {
+        console.log('Connection non-autorisée');
+    }
+};
+
+//     Post.findByIdAndRemove(
+//         req.params.id,
+//         (error, data) => {
+//             if (!error) {
+//                 res.send(data);
+//                 if (data.imageUrl) {
+//                     const imageUrl = data.imageUrl.split("/uploads/")[1];
+//                     fs.unlink("front/public/uploads/" + imageUrl, (err) => {
+//                         if (err) throw err;
+//                         console.log('image supprimée');
+//                     });
+//                 } else {
+//                     console.log("post sans image");
+//                 }
+//             }
+//             else console.log("erreur dans 'delete' : " + error);
+//         });
+//     console.log("post supprimé");
+// }
 
 // méthode pour "like" un "post"
 exports.likePost = (req, res) => {

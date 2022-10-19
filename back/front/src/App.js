@@ -6,12 +6,13 @@ import { useDispatch } from "react-redux";
 import { getUser } from "./actions/user.actions";
 
 const App = () => {
-  //
+  // on déclare un "state" vide qui sera "set" après la la requête. 
   const [uid, setUid] = useState(null);
-  //
+
+  // on lance la fonction 
   const dispatch = useDispatch();
 
-  //
+  // on implémente les conditions pour autoriser la navigation via le "token"
   useEffect(() => {
     // on récupère le userId pour autoriser la navigation
     const getToken = async () => {

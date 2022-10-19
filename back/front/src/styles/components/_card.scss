@@ -17,6 +17,9 @@ $shadow: #eba8a8;
   position: relative;
   min-height: 100px;
 
+  h2 {
+    font-size: 1.2em;
+  }
   @media screen and (max-width: 590px) {
     grid-template-columns: 1fr;
   }
@@ -60,10 +63,10 @@ $shadow: #eba8a8;
     .card-header {
       display: flex;
       justify-content: space-between;
-      margin: 2px 0 4px;
+      margin: 2px 0 14px;
 
       @media screen and (max-width: 590px) {
-        margin: 12px 0 14px;
+        margin: 2px 0 4px;
       }
 
       @media screen and (max-width: 440px) {
@@ -207,12 +210,6 @@ $shadow: #eba8a8;
       margin-top: 12px;
       box-shadow: 0 0 3px rgba(51, 51, 51, 0.342);
     }
-    iframe {
-      width: 100%;
-      min-height: 330px;
-      border-radius: 30px;
-      box-shadow: 0 0 3px rgba(51, 51, 51, 0.342);
-    }
     .button-container {
       justify-content: flex-end;
       display: flex;
@@ -340,7 +337,7 @@ $shadow: #eba8a8;
         }
 
         span {
-          font-size: 0.9rem;
+          font-size: 1rem;
           font-style: italic;
         }
       }

@@ -41,7 +41,6 @@ export default function postReducer(state = initialState, action) {
                     return {
                         ...post, // on destructure
                         message: action.payload.message, // nouveau "text"
-                        //imageUrl: action.payload.imageUrl, // nouvel "image"
                     };
                 } else return post;
             });

@@ -348,6 +348,9 @@ nav .icon_log:hover {
   position: relative;
   min-height: 100px;
 }
+.card-container h2 {
+  font-size: 1.2em;
+}
 @media screen and (max-width: 590px) {
   .card-container {
     grid-template-columns: 1fr;
@@ -401,11 +404,11 @@ nav .icon_log:hover {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin: 2px 0 4px;
+  margin: 2px 0 14px;
 }
 @media screen and (max-width: 590px) {
   .card-container .card-right .card-header {
-    margin: 12px 0 14px;
+    margin: 2px 0 4px;
   }
 }
 @media screen and (max-width: 440px) {
@@ -568,13 +571,6 @@ nav .icon_log:hover {
   -webkit-box-shadow: 0 0 3px rgba(51, 51, 51, 0.342);
           box-shadow: 0 0 3px rgba(51, 51, 51, 0.342);
 }
-.card-container .card-right iframe {
-  width: 100%;
-  min-height: 330px;
-  border-radius: 30px;
-  -webkit-box-shadow: 0 0 3px rgba(51, 51, 51, 0.342);
-          box-shadow: 0 0 3px rgba(51, 51, 51, 0.342);
-}
 .card-container .card-right .button-container {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
@@ -732,7 +728,7 @@ nav .icon_log:hover {
   opacity: 1;
 }
 .card-container .card-right .comment-container .comment-header span {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-style: italic;
 }
 .card-container .card-right .comment-container p {
@@ -1082,7 +1078,7 @@ nav .icon_log:hover {
   left: 30px;
   z-index: 10;
 }
-.icon-profil h4 {
+.icon-profil p {
   opacity: 0;
   -webkit-transition: 0.4s;
   transition: 0.4s;
@@ -1154,7 +1150,7 @@ nav .icon_log:hover {
   position: relative;
 }
 
-.icon-profil:hover h4 {
+.icon-profil:hover p {
   background: rgba(57, 59, 73, 0.6941176471);
   border-radius: 10px;
   border: #fd2d01 solid 1px;
@@ -1327,9 +1323,10 @@ nav .icon_log:hover {
 .profil-page .connection-form .form-container form a {
   color: rgb(62, 62, 214);
 }
-.profil-page h1 {
+.profil-page h2 {
   text-align: center;
   margin: 10px 0 6px;
+  font-size: 2.2rem;
 }
 .profil-page .img-container {
   display: grid;
@@ -1468,7 +1465,7 @@ nav .icon_log:hover {
 .profil-page .update-container .right-part h3 {
   margin-bottom: 12px;
 }
-.profil-page .update-container .right-part p,
+.profil-page .update-container .right-part h3,
 .profil-page .update-container .right-part textarea {
   color: white;
   min-height: 80px;
@@ -2033,7 +2030,7 @@ nav .icon_log:hover {
   border-radius: 50px;
   border: 1px solid #fd2d01;
 }
-.trending-container h4 {
+.trending-container h3 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

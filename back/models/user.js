@@ -69,7 +69,7 @@ const userSchema = mongoose.Schema(
 
 // on crypte avant de sauvegarder dans la "database"
 userSchema.pre("save", async function (next) {
-    // on chiffre le password 
+    // on chiffre le password 10 fois par défaut
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt);
     next();

@@ -17,9 +17,6 @@ const Card = ({ post }) => {
     // on implémente une variable pour sauvegarder le nouveau "text"
     const [textUpdate, setTextUpdate] = useState(null);
 
-    // on déclare la logique de la gestion d'une "image" à envoyer au "back"
-    //const [file, setFile] = useState();
-
     // on implémente la logique pour afficher les commentaires
     const [showComments, setShowComments] = useState(false);
 
@@ -66,7 +63,7 @@ const Card = ({ post }) => {
                     <div className="card-right">
                         <div className="card-header">
                             <div className="pseudo">
-                                <h3>
+                                <h2>
                                     {/* on indique la condition pour éviter de s'abonner soi-même */}
                                     {post.userId !== userData._id && (
                                         <FollowHandler idToFollow={post.userId} type={"card"} />
@@ -86,7 +83,7 @@ const Card = ({ post }) => {
                                                 else return null;
                                             }).join("")}
                                     </span>
-                                </h3>
+                                </h2>
                             </div>
                             {/* on implémente la date via "dateParser" */}
                             <span>{dateParser(post.createdAt)}</span>
@@ -106,7 +103,7 @@ const Card = ({ post }) => {
                             </span>
                         </div>
                         {/* s'il n'y a pas de modifications => false && <p> */}
-                        {isUpdated === false && <h4>{post.message}</h4>}
+                        {isUpdated === false && <h2>{post.message}</h2>}
                         {isUpdated && ( // "isUpdated" => true
                             <div className="update-post">
                                 <textarea

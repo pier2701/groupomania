@@ -58,7 +58,7 @@ const CardComments = ({ post }) => {
                                 {/* on indique la date traitée via => "timestampParser" */}
                                 <span>{timestampParser(comment.timestamp)}</span>
                             </div>
-                            <p>{comment.text}</p>
+                            <h4>{comment.text}</h4>
                             {/* on passe les "props" pour la mise à jour */}
                             <EditDeleteComment comment={comment} postId={post._id} />
                         </div>

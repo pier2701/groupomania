@@ -20,7 +20,7 @@ const Profil = () => {
                         <NavLink to='/' className='active-left-nav'>
                             <img tabIndex="0" src="./img/icons/new-home.svg" alt="accueil" />
                         </NavLink>
-                        <h4>Posts</h4>
+                        <p>Posts</p>
                     </div>
                     {/* on intègre nos "props" */}
                     <Log signin={false} signup={true} />

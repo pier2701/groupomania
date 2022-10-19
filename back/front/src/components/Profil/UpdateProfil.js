@@ -41,10 +41,10 @@ const UpdateProfil = () => {
                 <NavLink to='/' className='active-left-nav'>
                     <img tabIndex="0" src="./img/icons/new-home.svg" alt="accueil" />
                 </NavLink>
-                <h4>Posts</h4>
+                <p>Posts</p>
             </div>
             {/* on intègre dynamiquement le "pseudo" */}
-            <h1>Profil de {userData.pseudo}</h1>
+            <h2>Profil de {userData.pseudo}</h2>
 
             <div className="update-container">
                 <div className="left-part">
@@ -62,7 +62,7 @@ const UpdateProfil = () => {
                         {updateForm === false && (
                             <>
                                 {/* les 2 façons pour éditer la "bio" */}
-                                <p tabIndex="0" onClick={() => setUpdateForm(!updateForm)}>{userData.bio}</p>
+                                <h3 tabIndex="0" onClick={() => setUpdateForm(!updateForm)}>{userData.bio}</h3>
                                 <button onClick={() => setUpdateForm(!updateForm)}>
                                     Votre service
                                 </button>
