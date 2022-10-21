@@ -10,7 +10,6 @@ const upload = multer();
 
 // importation des "post" créé le dossier "controllers"
 const postCtrl = require("../controllers/post.controller");
-const { requireAuth } = require('../middleware/auth.middleware');
 
 // la route vers laquelle nous intercepterons les requêtes de type GET de toutes les posts
 router.get("/", postCtrl.readAllPosts);
@@ -22,10 +21,10 @@ router.get("/:id", postCtrl.getOnePost);
 router.post("/", upload.single("file"), postCtrl.createPost);
 
 // route de type PUT request pour modifier un article
-router.put("/:id", requireAuth, postCtrl.updatePost);
+router.put("/:id", upload.single("file"), postCtrl.updatePost);
 
 // route de type DELETE request pour supprimer un article
-router.delete("/:id", requireAuth, postCtrl.deletePost);
+router.delete("/:id", postCtrl.deletePost);
 
 // les routes vers laquelle nous intercepterons les requêtes de type PATCH des "like/unlike"
 router.patch('/like/:id', postCtrl.likePost);

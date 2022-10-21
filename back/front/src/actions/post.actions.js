@@ -80,16 +80,16 @@ export const unlikePost = (postId, userId) => {
 };
 
 // on implémente la mise à jour du "text"
-export const updatePost = (postId, message) => {
+export const updatePost = (postId, data) => {
     return (dispatch) => {
         return axios({
             method: "put",
             url: `http://localhost:8000/api/post/${postId}`,
-            data: { message },
+            data: data,
             withCredentials: true,
         })
             .then((res) => { // on transmet au "reducer" (redux) 
-                dispatch({ type: UPDATE_POST, payload: { message, postId } });
+                dispatch({ type: UPDATE_POST, payload: { data, postId } });
             })
             .catch((err) => console.log(err));
     };

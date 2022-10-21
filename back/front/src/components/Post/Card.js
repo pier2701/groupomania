@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty, dateParser } from '../Utils';
 import FollowHandler from '../Profil/FollowHandler';
 import LikeButton from "./LikeButton";
-import { updatePost } from '../../actions/post.actions';
+import { getPosts, updatePost } from '../../actions/post.actions';
 import DeleteCard from './DeleteCard';
 import CardComments from './CardComments';
 
@@ -16,6 +16,9 @@ const Card = ({ post }) => {
 
     // on implémente une variable pour sauvegarder le nouveau "text"
     const [textUpdate, setTextUpdate] = useState(null);
+
+    // on déclare la logique de la gestion d'une "image" à envoyer au "back"
+    const [file, setFile] = useState();
 
     // on implémente la logique pour afficher les commentaires
     const [showComments, setShowComments] = useState(false);
@@ -30,9 +33,13 @@ const Card = ({ post }) => {
     const dispatch = useDispatch();
 
     // on implémente la fonction pour mettre à jour le "text"
-    const updateItem = () => {
-        if (textUpdate) { // s'il y a du contenu à modifier
-            dispatch(updatePost(post._id, textUpdate)) // mise à jour du "text" via le userId du post
+    const updateItem = async () => {
+        if (textUpdate || file) { // s'il y a du contenu à modifier
+            const data = new FormData();
+            data.append('message', textUpdate);
+            data.append('file', file);
+            await dispatch(updatePost(post._id, data)) // mise à jour du "text" via le userId du post
+            dispatch(getPosts()); // on met à jour les "posts"
         }
         setIsUpdated(false); // on enlève la partie "édition" de texte
     };
@@ -110,9 +117,23 @@ const Card = ({ post }) => {
                                     defaultValue={post.message} // message initial
                                     onChange={(e) => setTextUpdate(e.target.value + " ( modifié )")} // on indique en front la modification
                                 />
+                                <div className="icon">
+                                    <>
+                                        <img src="./img/icons/picture1.svg" alt="icon paysage" />
+                                        <input
+                                            aria-label="ajouter une image"
+                                            type="file"
+                                            id="file-upload"
+                                            name="file"
+                                            accept=".jpg, .jpeg, .png"
+                                            onChange={(e) => setFile(e.target.files[0])}
+                                        />
+                                    </>
+                                    <span className='add-img'>ajouter une image</span>
+                                </div>
                                 <div className="button-container">
                                     <button className='btn' onClick={updateItem}>
-                                        Changer le message
+                                        Changer le post
                                     </button>
                                 </div>
                             </div>
