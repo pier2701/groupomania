@@ -554,7 +554,61 @@ nav .icon_log:hover {
   padding-left: 20px;
   border-radius: 20px 20px 0px 20px;
 }
+.card-container .card-right .update-post .icon {
+  position: relative;
+  cursor: pointer;
+  width: 40px;
+  height: 30px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+.card-container .card-right .update-post .icon img {
+  position: absolute;
+  left: 15px;
+  height: 40px;
+  width: 40px;
+  border-radius: 10px;
+  -webkit-transform: translate(-18px, -1px);
+          transform: translate(-18px, -1px);
+}
+.card-container .card-right .update-post .icon:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+.card-container .card-right .update-post .icon:hover .add-img {
+  left: -20px;
+  opacity: 1;
+}
+.card-container .card-right .update-post .icon .add-img {
+  background: rgba(0, 22, 44, 0.276);
+  border-radius: 10px;
+  border: #ffd7d7 solid 1.5px;
+  padding: 0px 4px;
+  opacity: 0;
+  font-size: 12px;
+  width: 110px;
+  position: absolute;
+  top: 35px;
+  left: -140px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+.card-container .card-right .update-post input {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 7px;
+  right: -7px;
+  -webkit-transform: translate(-16px, -3px);
+          transform: translate(-16px, -3px);
+  opacity: 0;
+  cursor: pointer;
+}
+.card-container .card-right .update-post input::-webkit-file-upload-button {
+  cursor: pointer;
+}
 .card-container .card-right .update-post .button-container .btn {
+  margin-top: -30px;
   color: black;
   background: #ffd7d7;
   width: 200px;

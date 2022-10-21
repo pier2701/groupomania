@@ -190,8 +190,57 @@ $shadow: #eba8a8;
         padding-left: 20px;
         border-radius: 20px 20px 0px 20px;
       }
+      .icon {
+        position: relative;
+        cursor: pointer;
+        width: 40px;
+        height: 30px;
+        transition: 0.2s;
+        img {
+          position: absolute;
+          left: 15px;
+          height: 40px;
+          width: 40px;
+          border-radius: 10px;
+          transform: translate(-18px, -1px);
+        }
+        &:hover {
+          transform: scale(1.1);
+          .add-img {
+            left: -20px;
+            opacity: 1;
+          }
+        }
+        .add-img {
+          background: $color-3;
+          border-radius: 10px;
+          border: $color-2 solid 1.5px;
+          padding: 0px 4px;
+          opacity: 0;
+          font-size: 12px;
+          width: 110px;
+          position: absolute;
+          top: 35px;
+          left: -140px;
+          transition: 0.2s;
+        }
+      }
+      input {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 7px;
+        right: -7px;
+        transform: translate(-16px, -3px);
+        opacity: 0;
+        cursor: pointer;
+        &::-webkit-file-upload-button {
+          cursor: pointer;
+        }
+      }
       .button-container {
         .btn {
+          margin-top: -30px;
           color: black;
           background: $color-2;
           width: 200px;
