@@ -1948,7 +1948,11 @@ nav .icon_log:hover {
 }
 .post-container .post-form .footer-form p {
   margin-top: 1px;
+  background: white;
   color: #fd2d01;
+  border-radius: 20px;
+  border: #fd2d01 solid 1px;
+  padding: 1px;
 }
 @media screen and (max-width: 460px) {
   .post-container .post-form .footer-form p {

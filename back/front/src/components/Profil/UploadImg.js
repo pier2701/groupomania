@@ -13,8 +13,7 @@ const UploadImg = () => {
     const userData = useSelector((state) => state.userReducer);
 
     // on met la logique pour récupèrer le fichier
-    const handlePicture = (e) => {
-
+    const handlePicture = async (e) => {
         e.preventDefault();
         // on met à jour les "data"
         const data = new FormData();
@@ -24,7 +23,7 @@ const UploadImg = () => {
         console.log(file);
         console.log(userData)
         // on met en place l'action
-        dispatch(uploadPicture(data, userData._id))
+        await dispatch(uploadPicture(data, userData._id))
     };
     return (
         <form action="" onSubmit={handlePicture} className="upload-pic" encType="multipart/form-data">

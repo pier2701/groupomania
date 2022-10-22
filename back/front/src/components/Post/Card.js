@@ -129,7 +129,7 @@ const Card = ({ post }) => {
                                             onChange={(e) => setFile(e.target.files[0])}
                                         />
                                     </>
-                                    <span className='add-img'>ajouter une image</span>
+                                    <span className='add-img'>changer l'image</span>
                                 </div>
                                 <div className="button-container">
                                     <button className='btn' onClick={updateItem}>
