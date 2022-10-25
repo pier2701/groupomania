@@ -12,12 +12,12 @@ exports.checkUser = (req, res, next) => {
         jwt.verify(token, process.env.SECRET_KEY, async (error, clearToken) => {
             if (error) {
                 res.locals.user = null;
-                //res.cookie("jwt", "", { maxAge: 1 });
                 next();
             } else {
                 let user = await UserModel.findById(clearToken.id);
-                // on  récupère les infos du "user"
+                // on  récupère l'Id' du "user"
                 res.locals.user = user;
+                //console.log(user);
                 next();
             }
         });

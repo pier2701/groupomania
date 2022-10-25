@@ -8,11 +8,14 @@ const { signUpErrors, signInErrors } = require('../utils/errors');
 const MAX_AGE = 3 * 60 * 60 * 1000; // expire au bout de 3h.
 require('dotenv').config({ path: './config/.env' });
 
-// paramètre du "token"
+// paramètre du "token" avec "id"
 const createToken = (id) => {
-    return jwt.sign({ id }, process.env.SECRET_KEY, {
-        expiresIn: MAX_AGE
-    })
+    return jwt.sign
+        (
+            { id },
+            process.env.SECRET_KEY,
+            { expiresIn: MAX_AGE }
+        )
 };
 
 // la logique pour s'inscrire
@@ -38,9 +41,15 @@ exports.signIn = async (req, res) => {
 
     try {
         const user = await UserModel.login(email, password);
+        // on stocke "_id" du "user" dans "token"
         const token = createToken(user._id);
         // on met le "token" dans un cookie
-        res.cookie('jwt', token, { httpOnly: true, MAX_AGE });
+        res.cookie
+            (
+                'jwt',
+                token,
+                { httpOnly: true, MAX_AGE }
+            );
         res.status(200).json({ user: user._id })
     } catch (error) {
         console.log(error);

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { followUser, unfollowUser } from '../../actions/user.actions';
 import { isEmpty } from '../Utils';
@@ -32,7 +32,7 @@ const FollowHandler = ({ idToFollow, type }) => { // on passe en "props" => "typ
                 setIsFollowed(true);
             } else setIsFollowed(false);
         }
-    }, [userData, idToFollow]) // callback en paramètre
+    }, [userData, idToFollow]) // le callback relancera la fonction à chaque modification 
 
     return (
         <>
@@ -40,7 +40,7 @@ const FollowHandler = ({ idToFollow, type }) => { // on passe en "props" => "typ
                 // on se désabonne au "click"
                 <span onClick={handleUnfollow}>
                     {/* on définit l'affichage en fonction de la "props" du component */}
-                    {type === "suggestion" && <button className='unfollow-btn'>Abonné</button>}
+                    {type === "suggestion" && <button className='unfollow-btn'>Ne pas suivre</button>}
                     {type === "card" && (
                         <div className='follow-icon'>
                             <img tabIndex="0" src='./img/icons/checked1.svg' alt='checked' />

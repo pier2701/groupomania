@@ -32,11 +32,11 @@ const Trends = () => {
                 return b.likers.length - a.likers.length;
             });
             // on adaptera l'affichage si le "user" est connecté ou pas
-            (!isEmpty(uid)) ? sortedArray.length = 3 : sortedArray.length = 7;
+            (!isEmpty(uid)) ? sortedArray.length = 5 : sortedArray.length = 6;
             // on transmet les "data" au "store"
             dispatch(getTrends(sortedArray));
         }
-    }, [posts, dispatch])
+    }, [posts]) // le callback relancera la fonction à chaque modification de "posts"
 
     return (
         <div className="trending-container">
@@ -47,7 +47,7 @@ const Trends = () => {
             <NavLink to="/trending">
                 <ul>
                     {trendList.length &&
-                        trendList.map((post) => { // on affiche la liste des tendnaces
+                        trendList.map((post) => { // on affiche la liste des tendances
                             return (
                                 <li tabIndex="0" key={post._id}>
                                     <div>
@@ -60,7 +60,7 @@ const Trends = () => {
                                                     return user.picture;
                                                 } else return null;
                                             }).join("")
-                                            } alt="photo du profil" />
+                                            } alt="photo du post" />
                                         )}
                                     </div>
                                     <div className="trend-content">

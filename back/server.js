@@ -75,10 +75,10 @@ app.use(
     })
 );
 
-// on met en place la vérification "user" ("jwt") avant toutes nos routes
+// on met en place l'autorisation "user" ("jwt") avant toutes nos routes
 app.get('*', checkUser);
 
-// route "front" pour vérifier le "user"
+// route "front" pour vérifier le token "user" lors de l'authentication
 app.get('/jwtid', requireAuth, (req, res) => {
     res.status(200).send(res.locals.user._id)
 });

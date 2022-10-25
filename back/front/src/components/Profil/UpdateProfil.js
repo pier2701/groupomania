@@ -31,7 +31,6 @@ const UpdateProfil = () => {
 
     // la logique lors du "click"
     const handleUpdate = () => { // on importe la logique 
-        e.preventDefault();
         dispatch(updateBio(userData._id, bio));
         setUpdateForm(false); // on remet notre formulaire
     };

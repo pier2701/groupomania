@@ -127,7 +127,6 @@ $shadow: rgb(219, 218, 218);
 }
 
 .profil-page {
-  //color: white;
   margin: 80px auto 0;
   max-width: 1200px;
 
@@ -137,8 +136,6 @@ $shadow: rgb(219, 218, 218);
 
   .log-container {
     margin: 0 auto;
-    // display: grid;
-    // grid-template-columns: 60% 40%;
 
     @media screen and (max-width: 885px) {
       grid-template-columns: 1fr;

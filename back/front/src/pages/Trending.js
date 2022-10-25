@@ -26,7 +26,9 @@ const Trending = () => {
         </div>
         <div className="right-side">
             <div className="right-side-container">
+                {/* on affiche les + "likés" */}
                 <Trends />
+                {/* si le user est connecté, on affichera les autres "user" */}
                 {uid && <FriendsList />}
             </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 // on importe l'action créée
-import { uploadPicture } from "../../actions/user.actions";
+import { getUser, uploadPicture } from "../../actions/user.actions";
 
 const UploadImg = () => {
     // on met en place la logique pour remplacer le fichier
@@ -23,7 +23,8 @@ const UploadImg = () => {
         console.log(file);
         console.log(userData)
         // on met en place l'action
-        await dispatch(uploadPicture(data, userData._id))
+        dispatch(uploadPicture(data, userData._id))
+        //await dispatch(getUser())
     };
     return (
         <form action="" onSubmit={handlePicture} className="upload-pic" encType="multipart/form-data">

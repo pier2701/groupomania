@@ -32,7 +32,7 @@ const FriendList = () => {
             });
             // on rend aléatoire la liste de résultat
             array.sort(() => 0.5 - Math.random());
-            array.length = 5;
+            array.length = 6;
             setFriendList(array); // on récupère le [] dans la fonction
         };
 
@@ -58,7 +58,7 @@ const FriendList = () => {
                             // on récupère les "data" depuis les "usersData"
                             if (user === usersData[i]._id) {
                                 return (
-                                    <li className="user-hint" key={user}>
+                                    <li className="coworkers" key={user}>
                                         <img src={usersData[i].picture} alt="" />
                                         <p>{usersData[i].pseudo}</p>
                                         <FollowHandler idToFollow={usersData[i]._id} type={"suggestion"} />

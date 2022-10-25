@@ -11,7 +11,7 @@ const initialState = {};
 export default function userReducer(state = initialState, action) {
     switch (action.type) {
         case GET_USER:
-            return action.payload;
+            return action.payload; // on incrémente "initialState" du "res.data" de l'action
         case UPLOAD_PICTURE:
             return {
                 ...state, // on destructure pour changer que "picture"

@@ -8,7 +8,7 @@ const Navbar = () => {
     // on vérifie si le "user" à les autorisations
     const uid = useContext(UidContext);
 
-    // on met à dispodition les "datas" du userReducer pour les afficher
+    // on met à disposition les "datas" du userReducer pour les afficher
     const userData = useSelector((state) => state.userReducer);
 
     return (

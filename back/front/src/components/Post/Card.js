@@ -39,7 +39,7 @@ const Card = ({ post }) => {
             data.append('message', textUpdate);
             data.append('file', file);
             await dispatch(updatePost(post._id, data)) // mise à jour du "text" via le userId du post
-            dispatch(getPosts()); // on met à jour les "posts"
+            dispatch(getPosts()); // on met à jour les "posts" pour l'affichage dans le "front"
         }
         setIsUpdated(false); // on enlève la partie "édition" de texte
     };
@@ -47,7 +47,7 @@ const Card = ({ post }) => {
     // on créé la logique pour enlever le spinner et afficher les "data"
     useEffect(() => {
         !isEmpty(usersData[0]) && setIsLoading(false)
-    }, [usersData]); // le callback
+    }, [usersData]); // le callback relancera la fonction à chaque modification de l'état "usersData" 
 
     return (
         <li className='card-container' key={post._id}>
@@ -144,7 +144,7 @@ const Card = ({ post }) => {
                             <div className="button-container">
                                 <div onClick={() => setIsUpdated(!isUpdated)}>
                                     {/* on inverse les états au click => toggle  */}
-                                    <img src="./img/icons/edit.svg" alt="changer le texte" />
+                                    <img src="./img/icons/edit.svg" alt="changer le post" />
                                 </div>
                                 <DeleteCard id={post._id} />
                             </div>

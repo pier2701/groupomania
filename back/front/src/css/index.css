@@ -1988,7 +1988,7 @@ nav .icon_log:hover {
 }
 @media screen and (max-width: 460px) {
   .post-container .post-form .footer-form .btn-send button {
-    font-size: 0.7rem;
+    font-size: 1rem;
     margin-top: 3px;
     padding: 8px;
   }
@@ -2019,7 +2019,7 @@ nav .icon_log:hover {
   width: 100%;
   padding: 14px 0 0;
 }
-.get-friends-container ul .user-hint {
+.get-friends-container ul .coworkers {
   display: grid;
   grid-template-columns: 20% 50% 30%;
   -webkit-box-align: center;
@@ -2027,33 +2027,34 @@ nav .icon_log:hover {
           align-items: center;
   margin: 8px 0;
 }
-.get-friends-container ul .user-hint img {
+.get-friends-container ul .coworkers img {
   height: 46px;
   width: 46px;
   border-radius: 50px;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.get-friends-container ul .user-hint p {
+.get-friends-container ul .coworkers p {
   text-align: left;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
-.get-friends-container ul .user-hint span {
+.get-friends-container ul .coworkers span {
   text-align: center;
 }
-.get-friends-container ul .user-hint span button {
-  width: 90px;
+.get-friends-container ul .coworkers span button {
+  position: relative;
+  right: 30px;
+  width: 130px;
   background: #393b49;
   color: #fdeeee;
-  padding: 10px 24px 8px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
   border-radius: 20px;
   border-top: #ffd7d7 solid 2px;
   border-bottom: #ffd7d7 solid 2px;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
-.get-friends-container ul .user-hint span button:hover {
+.get-friends-container ul .coworkers span button:hover {
   border: #fd2d01 solid 0.1px;
   background: #fdeeee;
   color: #5e627d;
@@ -2139,7 +2140,7 @@ nav .icon_log:hover {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.2rem;
 }
 .trending-container ul li .trend-content span {

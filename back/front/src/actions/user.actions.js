@@ -12,10 +12,11 @@ export const GET_USER_ERRORS = "GET_USER_ERRORS";
 
 // on affiche le "user"
 export const getUser = (uid) => {
-    return (dispatch) => {
+    return (dispatch) => { // on envoie au "reducer"
+        // on passe par la "database" 
         return axios
             .get(`http://localhost:8000/api/user/${uid}`) // on autorise la navigation en fonction de "uid"
-            .then((res) => { // on renvoie la "data"
+            .then((res) => { // on renvoie la "data" au "reducer" puis ensuite au "store"
                 dispatch({ type: GET_USER, payload: res.data });
             })
             .catch((err) => console.log(err));
