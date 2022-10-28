@@ -6,6 +6,7 @@ import Thread from '../components/Thread';
 import Log from "../components/Log";
 import Trends from '../components/Trends';
 import FriendsList from "../components/Profil/FriendsList";
+import Profil from './Profil';
 
 
 const Home = () => {
@@ -13,24 +14,25 @@ const Home = () => {
     const uid = useContext(UidContext);
 
     return (
-        <div className="home">
-            <LeftNav />
-            <div className="main">
-                <div className="home-header">
-                    {/* si le "user" est connecté ou pas */}
-                    {uid ? <NewPostForm /> : <Log signin={true} signup={false} />}
-                </div>
-                <Thread />
-            </div>
-            <div className="right-side">
-                <div className="right-side-container">
-                    <div className="wrapper">
-                        <Trends />
-                        {uid && <FriendsList />}
+        <>
+            {(uid) ?
+                (<div className="home">
+                    <LeftNav />
+                    <div className="main"><NewPostForm />
+                        <Thread />
                     </div>
-                </div>
-            </div>
-        </div>
+                    <div className="right-side">
+                        <div className="right-side-container">
+                            <div className="wrapper">
+                                <Trends />
+                                <FriendsList />
+                            </div>
+                        </div>
+                    </div>
+                </div>) :
+                (<Profil />)
+            }
+        </>
     );
 };
 

@@ -16,12 +16,12 @@ const Profil = () => {
                 <UpdateProfil />
             ) : (
                 <div className="log-container">
-                    <div className="icon-profil">
-                        <NavLink to='/' className='active-left-nav'>
+                    {/* <div className="icon-profil">
+                        <NavLink to='/home' className='active-left-nav'>
                             <img tabIndex="0" src="./img/icons/new-home.svg" alt="accueil" />
                         </NavLink>
                         <p>Posts</p>
-                    </div>
+                    </div> */}
                     {/* on intègre nos "props" */}
                     <Log signin={false} signup={true} />
                 </div>

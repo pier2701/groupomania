@@ -30,7 +30,7 @@ const SignInForm = () => {
                     passwordError.textContent = res.data.errors.password;
                 } else {
                     // sinon on est redirigé vers la page d'accueil
-                    window.location = "/";
+                    window.location = "/home";
                 }
             })
             .catch((error) => {

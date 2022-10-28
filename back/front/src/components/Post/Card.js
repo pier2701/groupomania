@@ -38,7 +38,7 @@ const Card = ({ post }) => {
             const data = new FormData();
             data.append('message', textUpdate);
             data.append('file', file);
-            await dispatch(updatePost(post._id, data)) // mise à jour du "text" via le userId du post
+            await dispatch(updatePost(post._id, data)) // mise à jour du "post" via le userId du post
             dispatch(getPosts()); // on met à jour les "posts" pour l'affichage dans le "front"
         }
         setIsUpdated(false); // on enlève la partie "édition" de texte

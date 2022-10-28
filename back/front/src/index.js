@@ -27,6 +27,7 @@ store.dispatch(getPosts());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  // le "store" deviendra un "prop" du <Provider />
   <Provider store={store}>
     <App />
   </Provider>

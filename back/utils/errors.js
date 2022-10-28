@@ -3,7 +3,7 @@ exports.signUpErrors = (error) => {
     let errors = { pseudo: "", email: "", password: "" };
 
     if (error.message.includes("pseudo"))
-        errors.pseudo = "Pseudo incorrect ou déjà pris.";
+        errors.pseudo = "Pseudo incorrect (4 à 35 caractères max) ou déjà pris.";
 
     if (error.message.includes("email"))
         errors.email = "Votre email ne respecte pas le bon format.";

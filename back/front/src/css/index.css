@@ -1761,7 +1761,8 @@ nav .icon_log:hover {
   font-weight: bold;
 }
 .post-container .user-info {
-  margin-bottom: 10px;
+  margin: 0 auto 12px;
+  text-align: center;
 }
 .post-container .user-info img {
   border-radius: 50px;

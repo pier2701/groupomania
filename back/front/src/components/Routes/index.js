@@ -5,17 +5,21 @@ import Navbar from '../Navbar';
 import Home from '../../pages/Home';
 import Profil from '../../pages/Profil';
 import Trending from '../../pages/Trending';
+//import { UidContext } from '../components/AppContext';
 
 const index = () => {
+    // on vérifie si le "user" est connecté
+    //const uid = useContext(UidContext);
+
     return (
         <BrowserRouter>
             <Navbar />
             <Routes>
-                {/* on définie "Home" comme page par défaut */}
-                <Route index element={<Home />} />
+                {/* on définie "Profil" comme page par défaut */}
+                <Route index element={<Profil />} />
 
                 {/* les routes/pages du site  */}
-                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
                 <Route path="/profil" element={<Profil />} />
                 <Route path="/trending" element={<Trending />} />
 

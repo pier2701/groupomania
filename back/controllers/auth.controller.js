@@ -63,5 +63,5 @@ exports.signIn = async (req, res) => {
 exports.logout = (req, res) => {
     // on génère un cookie vide
     res.cookie('jwt', '', { MAX_AGE: 1 });
-    res.redirect('/');
+    res.redirect('/profil');
 }

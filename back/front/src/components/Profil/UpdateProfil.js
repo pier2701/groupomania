@@ -38,7 +38,7 @@ const UpdateProfil = () => {
     return (
         <div className='profil-container'>
             <div className="icon-profil">
-                <NavLink to='/' className='active-left-nav'>
+                <NavLink to='/home' className='active-left-nav'>
                     <img tabIndex="0" src="./img/icons/new-home.svg" alt="accueil" />
                 </NavLink>
                 <p>Posts</p>
