@@ -55,7 +55,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 
 // mise en place d'une route pour les fichiers "static" (uploads)
-app.use("/upload", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // on met en place le module qui nous pernet de lire les "cookies" 
 app.use(cookieParser());

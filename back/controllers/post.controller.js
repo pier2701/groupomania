@@ -55,7 +55,7 @@ exports.createPost = async (req, res) => {
         await pipeline(
             req.file.stream,
             fs.createWriteStream(
-                `${__dirname}/../front/public/uploads/posts/${fileName}`
+                `${__dirname}/../../front/public/uploads/posts/${fileName}`
             )
         );
     }
@@ -112,7 +112,7 @@ exports.updatePost = (req, res) => {
                 console.log("l'imageUrl = ", imgFile);
 
                 // on supprime l'image du dossier "images"
-                fs.unlink("front/public/uploads/" + imgFile, (err) => {
+                fs.unlink("../front/public/uploads/" + imgFile, (err) => {
                     if (err) throw err;
                     console.log('image supprimée');
                 });
@@ -146,7 +146,7 @@ exports.updatePost = (req, res) => {
                                         pipeline(
                                             req.file.stream,
                                             fs.createWriteStream(
-                                                `${__dirname}/../front/public/uploads/posts/${fileName}`
+                                                `${__dirname}/../../front/public/uploads/posts/${fileName}`
                                             )
                                         );
                                     }
@@ -217,8 +217,10 @@ exports.deletePost = (req, res) => {
                                             if (!error) {
                                                 res.send(data);
                                                 if (data.imageUrl) {
+                                                    console.log("DATA.imageURL = " + data.imageUrl)
                                                     const imageUrl = data.imageUrl.split("/uploads/")[1];
-                                                    fs.unlink("front/public/uploads/" + imageUrl, (err) => {
+                                                    console.log("imageURL = " + imageUrl)
+                                                    fs.unlink("../front/public/uploads/" + imageUrl, (err) => {
                                                         if (err) throw err;
                                                         console.log('image supprimée');
                                                     });

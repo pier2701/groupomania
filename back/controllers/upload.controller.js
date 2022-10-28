@@ -38,7 +38,7 @@ exports.uploadProfileImage = async (req, res) => {
     // on récupère le fichier qu'on importera dans "../uploads/profil/"
     await pipeline(
         req.file.stream, // le fichier est sauvegardé dans "uploads"
-        fs.createWriteStream(`${__dirname}/../front/public/uploads/profil/${fileName}`)
+        fs.createWriteStream(`${__dirname}/../../front/public/uploads/profil/${fileName}`)
     );
 
     try {

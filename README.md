@@ -18,7 +18,7 @@ Après l'installation des modules, propres au fonctionnement de l'application, r
 Cette action lancera le serveur.
 
 Ouvrir un deuxième terminal, puis accèder au dossier "front" en tapant les commandes suivantes :
-`cd back` puis "enter", et enfin `cd front` puis "enter".
+`cd front` puis "entrer".
 puis taper :
 
 `npm install`
