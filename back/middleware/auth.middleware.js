@@ -17,7 +17,7 @@ exports.checkUser = (req, res, next) => {
                 let user = await UserModel.findById(clearToken.id);
                 // on  récupère l'Id' du "user"
                 res.locals.user = user;
-                //console.log(user);
+                console.log(user.pseudo)
                 next();
             }
         });
@@ -37,7 +37,7 @@ exports.requireAuth = (req, res, next) => {
                 console.log(error);
                 res.send(200).json('Connection non-autorisée : ' + error)
             } else {
-                console.log("le 'userId' : " + clearToken.id);
+                console.log(clearToken.id);
                 next();
             }
         });

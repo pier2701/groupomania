@@ -6,7 +6,7 @@ const LeftNav = () => {
         <div className='left-nav-container'>
             <div className='icons'>
                 <div className='icons-bis'>
-                    <NavLink to='/' className='active-left-nav'>
+                    <NavLink to='/home' className='active-left-nav'>
                         <img tabIndex="0" src="./img/icons/new-home.svg" alt="accueil" />
                         <p>Posts</p>
                     </NavLink>

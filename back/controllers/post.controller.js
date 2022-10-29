@@ -217,9 +217,7 @@ exports.deletePost = (req, res) => {
                                             if (!error) {
                                                 res.send(data);
                                                 if (data.imageUrl) {
-                                                    console.log("DATA.imageURL = " + data.imageUrl)
                                                     const imageUrl = data.imageUrl.split("/uploads/")[1];
-                                                    console.log("imageURL = " + imageUrl)
                                                     fs.unlink("../front/public/uploads/" + imageUrl, (err) => {
                                                         if (err) throw err;
                                                         console.log('image supprimée');
