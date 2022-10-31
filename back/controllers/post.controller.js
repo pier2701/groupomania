@@ -228,7 +228,7 @@ exports.deletePost = (req, res) => {
                                             }
                                             else console.log("erreur dans 'delete' : " + error);
                                         });
-                                    console.log("post supprimé");
+                                    console.log("le post est supprimé");
 
                                 } else {
                                     console.log('Suppression non-autorisée');
