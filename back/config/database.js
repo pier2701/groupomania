@@ -10,7 +10,8 @@ mongoose
         MONGODB_URI,
         {
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            useCreateIndex: true
         }
     )
     .then(() => console.log("Connexion à MongoDB Atlas réussie !"))
