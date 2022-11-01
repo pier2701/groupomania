@@ -11,20 +11,6 @@ En suivant les indications, vous devrez créer le fichier ".env" (au même nivea
 
 `npm install`
 
-Après l'installation du dossier node_modules, pour coordonnées les différentes versions installées, se rendre dans :
-
-`node_modules` puis
-
-`fs-temp` puis
-
-`lib` puis
-
-`white-stream.js` puis dans ce fichier remplacer à la ligne 6 :
-
-`WriteStream.call(this, null, options)` par
-
-`WriteStream.call(this, '', options)` et sauvegarder.
-
 Rester dans le dossier "back", depuis le terminal, puis taper :
 
 `nodemon server`

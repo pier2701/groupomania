@@ -10,9 +10,7 @@ const { uploadErrors } = require("../utils/errors");
 // le module "fs" nous permettra de manipuler des fichiers
 const fs = require("fs");
 
-// module qui va nous permettre d'exploiter le "stream" qui contiendra notre fichier
-const { promisify } = require("util");
-const pipeline = promisify(require("stream").pipeline);
+const sharp = require("sharp");
 
 // on récupère "_id" de MongoDB via une variable
 const ObjectId = require('mongoose').Types.ObjectId;
@@ -35,9 +33,9 @@ exports.createPost = async (req, res) => {
         try {
             if (
                 // on vérifie son format
-                req.file.detectedMimeType != "image/jpg" &&
-                req.file.detectedMimeType != "image/png" &&
-                req.file.detectedMimeType != "image/jpeg"
+                req.file.mimetype != "image/jpg" &&
+                req.file.mimetype != "image/png" &&
+                req.file.mimetype != "image/jpeg"
             )
                 throw Error("invalid file");
 
@@ -51,13 +49,9 @@ exports.createPost = async (req, res) => {
             const errors = uploadErrors(error);
             return res.status(201).json({ errors });
         }
-        // on récupère le fichier qu'on importera dans "../images/post/"
-        await pipeline(
-            req.file.stream,
-            fs.createWriteStream(
-                `${__dirname}/../../front/public/uploads/posts/${fileName}`
-            )
-        );
+        // on récupère le fichier qu'on importera dans "../uploads/posts/"
+        await sharp(req.file.buffer)
+            .toFile(`${__dirname}/../../front/public/uploads/posts/${fileName}`)
     }
 
     // on récupère le model du "Post"
@@ -143,12 +137,8 @@ exports.updatePost = (req, res) => {
                                     // si il y a une nouvelle image
                                     if (req.file) {
                                         // on récupère le fichier qu'on importera
-                                        pipeline(
-                                            req.file.stream,
-                                            fs.createWriteStream(
-                                                `${__dirname}/../../front/public/uploads/posts/${fileName}`
-                                            )
-                                        );
+                                        sharp(req.file.buffer)
+                                            .toFile(`${__dirname}/../../front/public/uploads/posts/${fileName}`)
                                     }
                                     console.log("fileName : " + fileName)
 

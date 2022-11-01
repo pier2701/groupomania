@@ -4,9 +4,7 @@ const User = require("../models/user");
 // le module "fs" nous permettra de manipuler des fichiers
 const fs = require("fs");
 
-// module qui va nous permettre d'exploiter le "stream" qui contiendra notre fichier
-const { promisify } = require("util");
-const pipeline = promisify(require("stream").pipeline);
+const sharp = require("sharp");
 
 // on importe une fonction qui exploitera les "error" pour le front
 const { uploadErrors } = require("../utils/errors");
@@ -15,9 +13,9 @@ exports.uploadProfileImage = async (req, res) => {
     try {
         if (
             // on vérifie le "bon" format de l'image
-            req.file.detectedMimeType != "image/jpg" &&
-            req.file.detectedMimeType != "image/png" &&
-            req.file.detectedMimeType != "image/jpeg"
+            req.file.mimetype != "image/jpg" &&
+            req.file.mimetype != "image/png" &&
+            req.file.mimetype != "image/jpeg"
         )
             throw Error("invalid file");
         if (
@@ -36,10 +34,8 @@ exports.uploadProfileImage = async (req, res) => {
     const fileName = req.body.name + ".jpg";
 
     // on récupère le fichier qu'on importera dans "../uploads/profil/"
-    await pipeline(
-        req.file.stream, // le fichier est sauvegardé dans "uploads"
-        fs.createWriteStream(`${__dirname}/../../front/public/uploads/profil/${fileName}`)
-    );
+    await sharp(req.file.buffer)
+        .toFile(`${__dirname}/../../front/public/uploads/profil/${fileName}`)
 
     try {
         // on met à jour l'image du "user"
